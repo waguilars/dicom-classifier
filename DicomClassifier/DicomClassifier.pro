@@ -17,20 +17,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    DicomReader.cpp
+    DicomReader.cpp \
+    svm.cpp \
+    fcm.cpp
 
 HEADERS += \
-    DicomReader.h
+    DicomReader.h \
+    svm.h \
+    fcm.h
 
-LIBS += -L"/usr/lib/x86_64-linux-gnu" \
-    -ldcmdata \
-    -ldcmimgle \
-    -ldcmimage \
-    -ldcmjpeg \
-    -loflog \
-    -lofstd \
-    -lpthread \
-    -lz
 
 
 # Default rules for deployment.
