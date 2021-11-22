@@ -83,7 +83,7 @@ En la pestaña `Search directories > linker` agregue el directorio donde se se e
 
 ## Ejemplos
 
-Puede encontrar ejemplos de uso [aquí](examples/README.md)
+Puede encontrar ejemplos de uso [aquí](examples)
 
 ## Autores
 
