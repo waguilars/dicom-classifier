@@ -57,8 +57,16 @@ LIBS += -L/dicom-classifier/build   # Directorio con los archivos compilados
 
 ### Codeblocks
 
+Para usarlo en codeblocks inicie un nuevo proyecto y asegurece de ejecutar el script `checker.sh` 
+dirigirse a configuraciones y compilador, dirigirse a link router y incluir las cabeceras del proyecto:
+```
+    -lDicomClassifier 
+    -ldcmdata 
+    -ldcmimgle 
+    -ldcmimage 
+    -ldcmjpeg
 
-
+```
 ## Authors
 
 - [Wilson Aguilar](https://www.github.com/waguilars)
