@@ -57,17 +57,35 @@ LIBS += -L/dicom-classifier/build   # Directorio con los archivos compilados
 
 ### Codeblocks
 
-Para usarlo en codeblocks inicie un nuevo proyecto y asegurece de ejecutar el script `checker.sh` 
-dirigirse a configuraciones y compilador, dirigirse a link router y incluir las cabeceras del proyecto:
-```
-    -lDicomClassifier 
-    -ldcmdata 
-    -ldcmimgle 
-    -ldcmimage 
-    -ldcmjpeg
+Para usarlo en codeblocks inicie un nuevo proyecto y asegurece de ejecutar el script `checker.sh`.
+
+Dirigirse a configuraciones y compilador, en la pestaña __linker settings__ agregue el archivo `libDicomClasifier.a` que se encuentra en la carpeta __build__ despues del proceso de compilacion. Tambien incluya las siguientes opciones:
 
 ```
-## Authors
+-lDicomClassifier
+-ldcmdata
+-ldcmimgle
+-ldcmimage
+-ldcmjpeg
+```
+
+Ahora en la pestaña `Search directories > compiler` agregue el directorio donde se encuentran los archivos `.h` del proyecto.
+
+```
+/home/user/projects/dicom-classifier/DicomClassifier
+```
+
+En la pestaña `Search directories > linker` agregue el directorio donde se se encuentran los archivos compilados.
+
+```
+/home/user/projects/dicom-classifier/build
+```
+
+## Ejemplos
+
+Puede encontrar ejemplos de uso [aquí](examples/README.md)
+
+## Autores
 
 - [Wilson Aguilar](https://www.github.com/waguilars)
 - [Gabriel Cacuango]()
