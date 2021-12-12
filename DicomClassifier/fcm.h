@@ -1,41 +1,34 @@
 #ifndef FCM_H
 #define FCM_H
 
-#include <eigen3/Eigen/Dense>
+#define MAX_DATA_POINTS 10000
+#define MAX_CLUSTER 100
+#define MAX_DATA_DIMENSION 5
 
-using namespace Eigen;
-using namespace std;
+class FCM
+{
+public:
+    FCM(double fuzziness, double epsilon);
+    void init(double **data, int clusters, int num_points, int num_dimensions);
+    void eval();
+    double **getCenters();
+    double **getMembershipMatrix();
 
-class FCM{
+private:
+    int num_data_points;
+    int num_clusters;
+    int num_dimensions;
+    double low_high[MAX_DATA_DIMENSION][2];
+    double degree_of_memb[MAX_DATA_POINTS][MAX_CLUSTER];
+    double epsilon;
+    double fuzziness;
+    double data_point[MAX_DATA_POINTS][MAX_DATA_DIMENSION];
+    double cluster_centre[MAX_CLUSTER][MAX_DATA_DIMENSION];
 
-  public:
-    FCM(double, double);
-    ~FCM();
-
-    double update_membership(); // returns the max diff
-    void compute_centers();
-    double get_dist(long, long);
-    double compute_membership_point(long, long);
-    void set_data(MatrixXf *);
-    void set_membership(MatrixXf *);
-    void init_membership();
-    void set_num_clusters(long);
-
-    MatrixXf * get_data();
-    MatrixXf * get_membership();
-    MatrixXf * get_cluster_center();
-
-  private:
-    double m_m; // the fuzziness
-    double m_epsilon; // threshold to stop
-    long m_num_clusters;
-    long m_num_dimensions;
-
-    MatrixXf * m_membership;
-    MatrixXf * m_data;
-    MatrixXf * m_cluster_center;
-
+    void calculate_centre_vectors();
+    double update_degree_of_membership();
+    double get_new_value(int i, int j);
+    double get_norm(int i, int j);
 };
 
-#endif
-
+#endif // FCM_H

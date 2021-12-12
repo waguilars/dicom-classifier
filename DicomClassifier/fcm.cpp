@@ -1,237 +1,166 @@
+#include "fcm.h"
+
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
-#include <math.h>
-#include <eigen3/Eigen/Dense>
-#include <float.h>
-#include "fcm.h"
+#include <vector>
+
+using namespace std;
+
+FCM::FCM(double fuzziness, double epsilon)
+{
+    this->fuzziness = fuzziness;
+    this->epsilon = epsilon;
 
 
-FCM::FCM(double m, double epsilon){
-    m_epsilon = epsilon;
-    m_m = m;
-    m_membership = nullptr;
-    m_data = nullptr;
-    m_cluster_center = nullptr;
-    m_num_clusters = 0;
-    m_num_dimensions = 0;
 }
 
-FCM::~FCM(){
-    if(m_data!=nullptr){
-        delete m_data;
-        m_data = nullptr;
+void FCM::init(double **data, int clusters, int num_points, int num_dimensions)
+{
+    if (num_clusters > MAX_CLUSTER) {
+        printf("Number of clusters should be < %d\n", MAX_CLUSTER);
+        exit(1);
+    }
+    if (num_data_points > MAX_DATA_POINTS) {
+        printf("Number of data points should be < %d\n", MAX_DATA_POINTS);
+        exit(1);
+    }
+    if (num_dimensions > MAX_DATA_DIMENSION) {
+        printf("Number of dimensions should be >= 1.0 and < %d\n",MAX_DATA_DIMENSION);
+        exit(1);
     }
 
-    if(m_membership!=nullptr){
-        delete m_membership;
-        m_membership = nullptr;
+    this->num_clusters = clusters;
+    this->num_data_points = num_points;
+    this->num_dimensions = num_dimensions;
+
+    for (int i = 0; i < this->num_data_points; i++) {
+        for (int j = 0; j < this->num_dimensions; j++) {
+            this->data_point[i][j] = data[i][j];
+            if (data[i][j] < low_high[j][0])
+                low_high[j][0] = data[i][j];
+            if (data[i][j] > low_high[j][1])
+                low_high[j][1] = data[i][j];
+        }
     }
 
-    if(m_cluster_center!=nullptr){
-        delete m_cluster_center;
-        m_cluster_center = nullptr;
+    double s;
+    int i, j, r, rval;
+
+    for (i = 0; i < num_data_points; i++) {
+        s = 0.0;
+        r = 100;
+        for (j = 1; j < num_clusters; j++) {
+            rval = rand() % (r + 1);
+            r -= rval;
+            degree_of_memb[i][j] = rval / 100.0;
+            s += degree_of_memb[i][j];
+        }
+        degree_of_memb[i][0] = 1.0 - s;
     }
 }
 
+void FCM::eval() {
+    double max_diff;
+    do {
+        calculate_centre_vectors();
+        max_diff = update_degree_of_membership();
+    } while (max_diff > epsilon);
+}
 
-double FCM::update_membership(){
-    /*
-     *
-    */
-    long k, i;
-    double new_uik;
-    double max_diff = 0.0, diff;
+double **FCM::getCenters()
+{
+    static double **centers;
+    centers= new double*[num_clusters];
 
-    if(m_data==nullptr || m_data->rows()==0){
-        throw std::logic_error("ERROR: data should not be empty when updating the membership");
+    for (int i = 0; i < this->num_clusters; ++i) {
+        centers[i] = new double[num_dimensions];
+        for (int j = 0; j < this->num_dimensions; ++j) {
+            centers[i][j] = cluster_centre[i][j];
+        }
     }
 
-    if(m_membership==nullptr || m_membership->rows() == 0 || m_membership->rows() != m_data->rows()){
-        //cout << "init the membership";
-        this->init_membership();
-    }
-    if(m_num_clusters==0){
-        throw std::logic_error("ERROR: the number of clusters should be set");
-    }
+    return centers;
+}
 
-//    cout <<"mdata rows: "<< m_data->rows()<<endl;
-//    cout << "mdata cols: "<<m_data->cols()<<endl;
+double **FCM::getMembershipMatrix()
+{
+    double **membershipMatrix;
+    membershipMatrix = new double*[num_data_points];
 
-    for (i = 0; i < m_num_clusters; i++) {
-        for (k = 0; k < m_data->rows(); k++) {
-            //cout << "point: " << k << " and cluster" << i <<endl;
-            //cout << "\nwill ask for the new new_uik"<< endl;
-            new_uik = this->compute_membership_point(i, k);
-            //cout << new_uik << endl;
-            diff = new_uik - (*m_membership)(k,i); // We need the membership inversed which is more natural for us
-            if (diff > max_diff){
-                max_diff = diff;
+    for (int i = 0; i < this->num_data_points; ++i) {
+        membershipMatrix[i] = new double[num_clusters];
+        for (int j = 0; j < this->num_clusters; ++j) {
+            membershipMatrix[i][j] = degree_of_memb[i][j];
+//            cout << membershipMatrix[i][j] << " " ;
+        }
+
+//        cout << endl;
+    }
+    return membershipMatrix;
+}
+
+void FCM::calculate_centre_vectors() {
+    int i, j, k;
+    double numerator, denominator;
+    double t[MAX_DATA_POINTS][MAX_CLUSTER];
+    for (i = 0; i < num_data_points; i++) {
+        for (j = 0; j < num_clusters; j++) {
+            t[i][j] = pow(degree_of_memb[i][j], fuzziness);
+        }
+    }
+    for (j = 0; j < num_clusters; j++) {
+        for (k = 0; k < num_dimensions; k++) {
+            numerator = 0.0;
+            denominator = 0.0;
+            for (i = 0; i < num_data_points; i++) {
+                numerator += t[i][j] * data_point[i][k];
+                denominator += t[i][j];
             }
-            (*m_membership)(k,i) = new_uik;
+            cluster_centre[j][k] = numerator / denominator;
+//            std::cout << cluster_centre[j][k] << endl;
+        }
+    }
+}
+
+
+double FCM::update_degree_of_membership() {
+    int i, j;
+    double new_uij;
+    double max_diff = 0.0, diff;
+    for (j = 0; j < num_clusters; j++) {
+        for (i = 0; i < num_data_points; i++) {
+            new_uij = get_new_value(i, j);
+            diff = new_uij - degree_of_memb[i][j];
+            if (diff > max_diff)
+                max_diff = diff;
+            degree_of_memb[i][j] = new_uij;
         }
     }
     return max_diff;
 }
 
 
-void FCM::compute_centers(){
-    long i, j, k;
-    double numerator, denominator;
-    MatrixXf t;
-    t.resize(m_data->rows(), m_num_clusters);
-    if(m_data == nullptr || m_data->rows() == 0){
-        throw std::logic_error("ERROR: number of rows is zero");
-        return;
+double FCM::get_new_value(int i, int j) {
+    int k;
+    double t, p, sum;
+    sum = 0.0;
+    p = 2 / (fuzziness - 1);
+    for (k = 0; k < num_clusters; k++) {
+        t = get_norm(i, j) / get_norm(i, k);
+        t = pow(t, p);
+        sum += t;
     }
-    for (i = 0; i < m_data->rows(); i++) { // compute (u^m) for each cluster for each point
-        for (j = 0; j < m_num_clusters; j++) {
-            t(i,j) = pow((*m_membership)(i,j), m_m);
-        }
-    }
-    for (j = 0; j < m_num_clusters; j++) { // loop for each cluster
-        for (k = 0; k < m_num_dimensions; k++) { // for each dimension
-            numerator = 0.0;
-            denominator = 0.0;
-            for (i = 0; i < m_data->rows(); i++) {
-                numerator += t(i,j) * (*m_data)(i,k);
-                denominator += t(i,j);
-            }
-            (*m_cluster_center)(j,k) = numerator / denominator;
-        }
-    }
+    return 1.0 / sum;
 }
 
-double FCM::get_dist(long i, long k){
-  /*
-   * distance which is denoted in the paper as d
-   * k is the data point
-   * i is the cluster center point
-  */
-  //cout<<"get_dist: point: "<<k<<" and cluster "<<i<<endl;
-  long j;
-  double sqsum = 0.0;
-  if(m_num_clusters==0){
-      throw std::logic_error("ERROR: number of clusters should not be zero\n");
-  }
-  if(m_num_dimensions==0){
-      throw std::logic_error("ERROR: number of dimensions should not be zero\n");
-  }
-  for (j = 0; j < m_num_dimensions; j++) {
-      sqsum += pow( ((*m_data)(k,j) - (*m_cluster_center)(i,j)) ,2) ;
-  }
-  return sqrt(sqsum);
+double FCM::get_norm(int i, int j) {
+    int k;
+    double sum = 0.0;
+    for (k = 0; k < num_dimensions; k++) {
+        sum += pow(data_point[i][k] - cluster_centre[j][k], 2);
+    }
+    return sqrt(sum);
 }
-
-double FCM::compute_membership_point(long i, long k){
-    /*
-     * i the cluster
-     * k is the data point
-    */
-    //cout << __func__ <<"  num of cluster: "<<m_num_clusters<<endl;
-    long j;
-    double t, seg=0.0;
-    double exp = 2 / (m_m - 1);
-    double dik, djk;
-    if(m_num_clusters==0){
-        throw std::logic_error("ERROR: number of clusters should not be zero\n");
-    }
-    for (j = 0; j < m_num_clusters; j++) {
-      dik = this->get_dist(i, k);
-      djk = this->get_dist(j,k);
-      if(djk==0){
-          djk = DBL_MIN;
-      }
-      t = dik / djk;
-      t = pow(t, exp);
-      //cout << "cluster: " << i << "data: " << k << " - " << "t: "<<t<<endl;
-      seg += t;
-    }
-    //cout << "seg: "<<seg << " u: "<<(1.0/seg)<<endl;
-    return 1.0 / seg;
-}
-
-
-void FCM::set_data(MatrixXf *data){
-    if(m_data!=nullptr){
-        delete m_data;
-    }
-    if(data->rows()==0){
-        throw std::logic_error("ERROR: seting empty data");
-    }
-    m_data = data;
-    m_num_dimensions = m_data->cols();
-}
-
-void FCM::set_membership(MatrixXf *membership){
-    if(m_data==0){
-        throw std::logic_error("ERROR: the data should present before setting up the membership");
-    }
-    if(m_num_clusters==0){
-        if(membership->cols() == 0){
-            throw std::logic_error("ERROR: the number of clusters is 0 and the membership matrix is empty");
-        }
-        else{
-            this->set_num_clusters(membership->cols());
-        }
-    }
-    if(m_membership!=nullptr){
-        delete m_membership;
-    }
-    m_membership = membership;
-    if(m_membership->rows()==0){
-        m_membership->resize(m_data->rows(), m_num_clusters);
-    }
-}
-
-void FCM::init_membership(){
-    long i, j;
-    double mem;
-    if(m_num_clusters == 0){
-        throw std::logic_error("ERROR: the number of clusters is 0");
-    }
-    if(m_data==nullptr){
-        throw std::logic_error("ERROR: the data should present before setting up the membership");
-    }
-    if(m_membership!=nullptr){
-        delete m_membership;
-    }
-    m_membership = new MatrixXf;
-    m_membership->resize(m_data->rows(), m_num_clusters);
-    mem = 1.0 / m_num_clusters;
-    for(j=0;j<m_num_clusters;j++){
-        for(i=0;i<m_data->rows();i++){
-            (*m_membership)(i,j) = mem;
-        }
-    }
-}
-
-void FCM::set_num_clusters(long num_clusters){
-    m_num_clusters = num_clusters;
-    if(m_cluster_center){
-        delete m_cluster_center;
-    }
-    m_cluster_center = new MatrixXf;
-    m_cluster_center->resize(m_num_clusters, m_num_dimensions);
-}
-
-MatrixXf * FCM::get_data(){
-    return m_data;
-}
-
-MatrixXf * FCM::get_membership(){
-    return m_membership;
-}
-
-MatrixXf * FCM::get_cluster_center(){
-    return m_cluster_center;
-}
-
-
-
-
-
-
-
-

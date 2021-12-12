@@ -1,5 +1,6 @@
 #include "DicomReader.h"
 #include <iostream>
+#include <fstream>
 
 #include "dcmtk/config/osconfig.h"
 #include "dcmtk/dcmdata/dctk.h"
@@ -22,7 +23,19 @@ DicomReader::DicomReader(const char *path)
     this->height = this->image->getHeight();
 }
 
-void DicomReader::sayHello() { cout << "Hello" << endl;}
+void DicomReader::saveCSV(const char *filename, int **data) {
+    std::ofstream myfile;
+    myfile.open (filename);
+    for (int i = 0; i < this->getHeight(); ++i) {
+        for (int j = 0; j < this->getWidth(); ++j) {
+            myfile << data[i][j] << ";";
+        }
+        myfile << endl;
+    }
+
+    myfile.close();
+    cout << filename << " has been created!" <<endl;
+}
 
 int DicomReader::getWidth() { return this->width; }
 

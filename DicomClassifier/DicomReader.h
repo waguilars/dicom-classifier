@@ -17,7 +17,8 @@ public:
     int getHeight();
     void setHeight(int height);
     int **getImageArray(int depth);
-    static void sayHello();
+    void saveCSV(const char *filename, int **data);
+
 };
 
 
