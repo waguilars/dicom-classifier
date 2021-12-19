@@ -17,14 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    DicomReader.cpp \
-    svm.cpp \
-    fcm.cpp
+    dicom/DicomReader.cpp \
+    svm/svm.cpp \
+    fcm/fcm.cpp \
+    knn/knn.cpp
 
 HEADERS += \
-    DicomReader.h \
-    svm.h \
-    fcm.h
+    dicom/DicomReader.h \
+    svm/svm.h \
+    fcm/fcm.h \
+    knn/knn.h
 
 
 
