@@ -20,13 +20,18 @@ SOURCES += \
     dicom/DicomReader.cpp \
     svm/svm.cpp \
     fcm/fcm.cpp \
-    knn/knn.cpp
+    knn/knn.cpp \
+    gbdt/Classifier.cxx \
+    gbdt/FastBDT.cxx \
+    gbdt/FastBDT_IO.cxx
+
 
 HEADERS += \
     dicom/DicomReader.h \
     svm/svm.h \
     fcm/fcm.h \
-    knn/knn.h
+    knn/knn.h \
+    gbdt/Classifier.h
 
 
 
