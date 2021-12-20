@@ -1,5 +1,5 @@
 
-#include "svm.h"
+#include "svm/svm.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <vector>

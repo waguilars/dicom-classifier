@@ -1,6 +1,6 @@
 #include <iostream>
-#include "DicomReader.h"
-#include "svm.h"
+#include "dicom/DicomReader.h"
+#include "svm/svm.h"
 
 using namespace std;
 
