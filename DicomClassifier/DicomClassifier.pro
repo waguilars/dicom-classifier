@@ -16,8 +16,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+QMAKE_CXXFLAGS += -pthread
+
+LIBS += -lpthread
+
+
+
 SOURCES += \
     dicom/DicomReader.cpp \
+    random_forest/ArgumentHandler.cpp \
+    random_forest/Data.cpp \
+    random_forest/Forest.cpp \
+    random_forest/ForestClassification.cpp \
+    random_forest/ForestProbability.cpp \
+    random_forest/ForestRegression.cpp \
+    random_forest/ForestSurvival.cpp \
+    random_forest/Tree.cpp \
+    random_forest/TreeClassification.cpp \
+    random_forest/TreeProbability.cpp \
+    random_forest/TreeRegression.cpp \
+    random_forest/TreeSurvival.cpp \
+    random_forest/utility.cpp \
     svm/svm.cpp \
     fcm/fcm.cpp \
     knn/knn.cpp \
@@ -28,6 +47,24 @@ SOURCES += \
 
 HEADERS += \
     dicom/DicomReader.h \
+    random_forest/ArgumentHandler.h \
+    random_forest/Data.h \
+    random_forest/DataChar.h \
+    random_forest/DataDouble.h \
+    random_forest/DataFloat.h \
+    random_forest/DataRcpp.h \
+    random_forest/Forest.h \
+    random_forest/ForestClassification.h \
+    random_forest/ForestProbability.h \
+    random_forest/ForestRegression.h \
+    random_forest/ForestSurvival.h \
+    random_forest/Tree.h \
+    random_forest/TreeClassification.h \
+    random_forest/TreeProbability.h \
+    random_forest/TreeRegression.h \
+    random_forest/TreeSurvival.h \
+    random_forest/globals.h \
+    random_forest/utility.h \
     svm/svm.h \
     fcm/fcm.h \
     knn/knn.h \
