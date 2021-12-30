@@ -47,30 +47,14 @@ SOURCES += \
 
 HEADERS += \
     dicom/DicomReader.h \
-    random_forest/ArgumentHandler.h \
-    random_forest/Data.h \
-    random_forest/DataChar.h \
-    random_forest/DataDouble.h \
-    random_forest/DataFloat.h \
-    random_forest/DataRcpp.h \
-    random_forest/Forest.h \
-    random_forest/ForestClassification.h \
-    random_forest/ForestProbability.h \
-    random_forest/ForestRegression.h \
-    random_forest/ForestSurvival.h \
-    random_forest/Tree.h \
-    random_forest/TreeClassification.h \
-    random_forest/TreeProbability.h \
-    random_forest/TreeRegression.h \
-    random_forest/TreeSurvival.h \
-    random_forest/globals.h \
-    random_forest/utility.h \
     svm/svm.h \
     fcm/fcm.h \
     knn/knn.h \
-    gbdt/Classifier.h
+    gbdt/Classifier.h \
 
 
+
+INCLUDEPATH += cereal tiny_dnn random_forest
 
 # Default rules for deployment.
 unix {
