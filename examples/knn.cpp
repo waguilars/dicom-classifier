@@ -1,11 +1,11 @@
-#include "tiny_cnn/tiny_cnn.h"
+#include "tiny_dnn/tiny_dnn.h"
 
-using namespace tiny_cnn;
-using namespace tiny_cnn::activation;
-using namespace tiny_cnn::layers;
+using namespace tiny_dnn;
+using namespace tiny_dnn::activation;
+using namespace tiny_dnn::layers;
 
 void construct_cnn() {
-    using namespace tiny_cnn;
+    using namespace tiny_dnn;
 
     network<sequential> net;
 
