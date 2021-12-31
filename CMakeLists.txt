@@ -4,7 +4,8 @@ project(DicomClassifier VERSION 0.1.0)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Define sources
 file(GLOB_RECURSE SOURCES_FILES
