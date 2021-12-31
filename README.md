@@ -23,16 +23,25 @@ sudo apt install libeigen3-dev libdcmtk-dev
 
 Antes de usar la libreria se necesita realizar el proceso de compilación para generar los archivos necesarios e importarlos directamente en su proyecto.
 
-Para compilar se utiliza QT creator.
-
 ### QT
+
+Para compilar la libreria se puede usar QT creator.
 
 1. Primero se clona el proyecto en su computadora.
 2. Abrir el archivo .pro con QT Creator.
 3. Configurar la carpeta donde se compilará
 4. Compilar el proyecto
 
-### Makefiles (proximamente)
+### CMake
+
+En caso de compilar con cmake asegurese de tener instalado la version `>3.0`
+
+```
+mkdir build
+cd build
+cmake ..
+make
+```
 
 ## Uso
 
@@ -40,18 +49,24 @@ Para usar esta libreria asegurese de haber compilado este proyecto y haber gener
 
 La libreria se ha usado con los IDEs QT Creator y CodeBlocks.
 
+> **Nota:** Algunos algoritmos hacen uso de procesamiento multi-hilo, para ellos asegurese de usar el flag `-pthread` e incluir la libreria `-lpthread`.
+
+> **Nota:** Segurese de incluir la dependencia de eigen3
+
 ### QT
 Para usarlo con QT inicialice un nuevo proyecto y asegurece que su archivo de configuracion `.pro` tenga lo siguiente:
 
 ```
-INCLUDEPATH += /dicom-classifier/DicomClassifier # Aqui es el path del proyecto con las cabeceras.
+INCLUDEPATH += /dicom-classifier/DicomClassifier \ # Aqui es el path del proyecto con las cabeceras.
+    /usr/include/eigen3 #incluimos la dependencia de eigen3
 
 LIBS += -L/dicom-classifier/build   # Directorio con los archivos compilados
     -lDicomClassifier \
     -ldcmdata \
     -ldcmimgle \
     -ldcmimage \
-    -ldcmjpeg
+    -ldcmjpeg \
+    -lpthread # Necesario para algunos algoritmos
 
 ```
 
@@ -67,6 +82,7 @@ Dirigirse a configuraciones y compilador, en la pestaña __linker settings__ agr
 -ldcmimgle
 -ldcmimage
 -ldcmjpeg
+-lpthread
 ```
 
 Ahora en la pestaña `Search directories > compiler` agregue el directorio donde se encuentran los archivos `.h` del proyecto.
