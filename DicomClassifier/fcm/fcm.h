@@ -1,9 +1,9 @@
 #ifndef FCM_H
 #define FCM_H
 
-#define MAX_DATA_POINTS 10000
+#define MAX_DATA_POINTS 5000
 #define MAX_CLUSTER 100
-#define MAX_DATA_DIMENSION 5
+#define MAX_DATA_DIMENSION 5000
 
 class FCM
 {
