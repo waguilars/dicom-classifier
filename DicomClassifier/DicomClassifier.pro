@@ -62,6 +62,7 @@ HEADERS += \
     svm/svm.h \
     fcm/fcm.h \
     gbdt/Classifier.h \
+    kmeans/kmeans.h
 
 
 
