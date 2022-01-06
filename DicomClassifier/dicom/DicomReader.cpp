@@ -74,6 +74,38 @@ std::vector<std::vector<double> > DicomReader::getDoubleImageMatrix(int depth)
 
 }
 
+void DicomReader::saveData(std::vector<std::vector<int> > data, const char *filename, string delimiter, bool header)
+{
+    std::ofstream output_file(filename);
+
+    // Write header
+    if (header) {
+        for (int i = 0; i < data[0].size(); ++i) {
+            if (i == data[0].size() - 1) {
+                output_file << "LABEL" << endl;
+            } else {
+                output_file << "X" << i << delimiter;
+            }
+        }
+
+    }
+
+    // Write data
+    for (const auto &row : data) {
+
+        for (int i = 0; i < row.size(); ++i) {
+
+            if (i == row.size() - 1) {
+                output_file << row[i];
+            } else {
+                output_file << row [i] << delimiter;
+            }
+        }
+        output_file << "\n";
+    }
+
+}
+
 int DicomReader::getWidth() { return this->width; }
 
 void DicomReader::setWidth(int width) { this->width = width; }
