@@ -1,6 +1,8 @@
 #ifndef DICOMREADER_H
 #define DICOMREADER_H
 
+#include<vector>
+
 class DicomImage;
 
 class DicomReader
@@ -18,6 +20,12 @@ public:
     void setHeight(int height);
     int **getImageArray(int depth);
     void saveCSV(const char *filename, int **data);
+
+    std::vector<std::vector<int>> getIntImageMatrix(int depth);
+
+    std::vector<std::vector<float>> getFloatImageMatrix(int depth);
+
+    std::vector<std::vector<double>> getDoubleImageMatrix(int depth);
 
 };
 

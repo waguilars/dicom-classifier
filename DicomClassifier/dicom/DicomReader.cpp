@@ -37,6 +37,43 @@ void DicomReader::saveCSV(const char *filename, int **data) {
     cout << filename << " has been created!" <<endl;
 }
 
+std::vector<std::vector<float> > DicomReader::getFloatImageMatrix(int depth)
+{
+    int **imageArr = this->getImageArray(depth);
+
+    vector<vector<float>> imageMatrix;
+
+    for (int i = 0; i < this->height; ++i) {
+        vector<float> row;
+        for (int j = 0; j < this->width; ++j) {
+            row.push_back(imageArr[i][j]);
+        }
+        imageMatrix.push_back(row);
+    }
+
+    return imageMatrix;
+
+}
+
+std::vector<std::vector<double> > DicomReader::getDoubleImageMatrix(int depth)
+{
+
+    int **imageArr = this->getImageArray(depth);
+
+    vector<vector<double>> imageMatrix;
+
+    for (int i = 0; i < this->height; ++i) {
+        vector<double> row;
+        for (int j = 0; j < this->width; ++j) {
+            row.push_back(imageArr[i][j]);
+        }
+        imageMatrix.push_back(row);
+    }
+
+    return imageMatrix;
+
+}
+
 int DicomReader::getWidth() { return this->width; }
 
 void DicomReader::setWidth(int width) { this->width = width; }
@@ -86,4 +123,23 @@ int **DicomReader::getImageArray(int depth = 16) {
     }
 
     return imageArray;
+}
+
+
+std::vector<std::vector<int>> DicomReader::getIntImageMatrix(int depth)
+{
+    int **imageArr = this->getImageArray(depth);
+
+    vector<vector<int>> imageMatrix;
+
+    for (int i = 0; i < this->height; ++i) {
+        vector<int> row;
+        for (int j = 0; j < this->width; ++j) {
+            row.push_back(imageArr[i][j]);
+        }
+        imageMatrix.push_back(row);
+    }
+
+    return imageMatrix;
+
 }

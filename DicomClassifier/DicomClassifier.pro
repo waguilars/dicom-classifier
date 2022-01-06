@@ -24,6 +24,12 @@ LIBS += -lpthread
 
 SOURCES += \
     dicom/DicomReader.cpp \
+    knn/Preprocessing.cpp \
+    knn/ReadDataset.cpp \
+    knn/dataset.cpp \
+    knn/knn.cpp \
+    knn/knnresults.cpp \
+    knn/matrix.cpp \
     random_forest/ArgumentHandler.cpp \
     random_forest/Data.cpp \
     random_forest/Forest.cpp \
@@ -39,7 +45,6 @@ SOURCES += \
     random_forest/utility.cpp \
     svm/svm.cpp \
     fcm/fcm.cpp \
-    knn/knn.cpp \
     gbdt/Classifier.cxx \
     gbdt/FastBDT.cxx \
     gbdt/FastBDT_IO.cxx
@@ -47,9 +52,15 @@ SOURCES += \
 
 HEADERS += \
     dicom/DicomReader.h \
+    knn/Preprocessing.h \
+    knn/ReadDataset.h \
+    knn/dataset.h \
+    knn/debug.h \
+    knn/knn.h \
+    knn/knnUtils.h \
+    knn/matrix.h \
     svm/svm.h \
     fcm/fcm.h \
-    knn/knn.h \
     gbdt/Classifier.h \
 
 
