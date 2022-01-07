@@ -180,6 +180,7 @@ class nodes {
   void label2vec(const label_t *t, size_t num, std::vector<vec_t> &vec) const {
     size_t outdim = out_data_size();
 
+
     vec.reserve(num);
     for (size_t i = 0; i < num; i++) {
       assert(t[i] < outdim);
