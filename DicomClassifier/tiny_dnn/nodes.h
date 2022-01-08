@@ -183,6 +183,7 @@ class nodes {
 
     vec.reserve(num);
     for (size_t i = 0; i < num; i++) {
+      // std::cout <<t[i]  << "-----" << outdim << std::endl;
       assert(t[i] < outdim);
       vec.emplace_back(outdim, target_value_min());
       vec.back()[t[i]] = target_value_max();

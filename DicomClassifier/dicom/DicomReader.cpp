@@ -136,17 +136,26 @@ int **DicomReader::getImageArray(int depth = 16) {
 
             image->setMinMaxWindow();
             // int depth = image->getDepth(); // Profundidad
-            Uint16 *pixelData = (Uint16 *)(image->getOutputData(depth));
-            int max = pixelData[0];
-            if (pixelData != NULL) {
-                for (int i = 0; i < height; ++i) {
-                    for (int j = 0; j < width; ++j) {
-                        int value = pixelData[i*j];
-                        if (value > max) {
-                            max = value;
-                        }
-                        imageArray[i][j] = value;
-                    }
+//            Uint16 *pixelData = (Uint16 *)(image->getOutputData(depth));
+//            int max = pixelData[0];
+//            if (pixelData != NULL) {
+//                for (int i = 0; i < height; ++i) {
+//                    for (int j = 0; j < width; ++j) {
+//                        int value = pixelData[i*j];
+//                        if (value > max) {
+//                            max = value;
+//                        }
+//                        imageArray[i][j] = value;
+//                    }
+//                }
+//            }
+
+            // TODO
+            const DiPixel* pixel = image->getInterData();
+            for (int i = 0; i < height; ++i) {
+                for (int j = 0; j < width; ++j) {
+                    int pixel_value = *((short*)(pixel->getData()) + (i * image->getWidth() + j));
+                    imageArray[i][j] = pixel_value;
                 }
             }
         }

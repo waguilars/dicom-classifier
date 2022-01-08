@@ -3,6 +3,7 @@
     "*.html": "html",
     "*.jsx": "javascriptreact",
     "*.js": "javascript",
-    "array": "cpp"
+    "array": "cpp",
+    "*.tcc": "cpp"
   }
 }
