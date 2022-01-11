@@ -27,7 +27,7 @@ int main()
 
 
 //    cout << "Begin..." << endl;
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < dcmFiles.size(); ++i) {
         performance.resetCounters();
         // add image to dataset
         string filename = DicomUtils::base_name(dcmFiles[i], "/");
