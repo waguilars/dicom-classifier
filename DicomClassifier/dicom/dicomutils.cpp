@@ -1,6 +1,7 @@
 #include "dicomutils.h"
 #include "DicomReader.h"
 #include <dirent.h>
+#include <fstream>
 
 using namespace std;
 
@@ -79,4 +80,9 @@ double **DicomUtils::asFCMPointsData(int **arr, int numPoints, int numDims)
         }
     }
     return data;
+}
+
+void DicomUtils::writeMetrics(ofstream &file, int i, string filename, double cpu, int mem, double time, double param)
+{
+        file << i << "," << filename << "," << cpu << "," << mem << "," << time << "," << param << endl;
 }
