@@ -37,6 +37,11 @@ void DicomReader::saveCSV(const char *filename, int **data) {
     cout << filename << " has been created!" <<endl;
 }
 
+void DicomReader::clear()
+{
+    delete this->image;
+}
+
 std::vector<std::vector<float> > DicomReader::getFloatImageMatrix(int depth)
 {
     int **imageArr = this->getImageArray(depth);
@@ -80,7 +85,7 @@ void DicomReader::saveData(std::vector<std::vector<int> > data, const char *file
 
     // Write header
     if (header) {
-        for (int i = 0; i < data[0].size(); ++i) {
+        for (size_t i = 0; i < data[0].size(); ++i) {
             if (i == data[0].size() - 1) {
                 output_file << "LABEL" << endl;
             } else {
@@ -93,7 +98,7 @@ void DicomReader::saveData(std::vector<std::vector<int> > data, const char *file
     // Write data
     for (const auto &row : data) {
 
-        for (int i = 0; i < row.size(); ++i) {
+        for (size_t i = 0; i < row.size(); ++i) {
 
             if (i == row.size() - 1) {
                 output_file << row[i];
@@ -135,22 +140,6 @@ int **DicomReader::getImageArray(int depth = 16) {
         {
 
             image->setMinMaxWindow();
-            // int depth = image->getDepth(); // Profundidad
-//            Uint16 *pixelData = (Uint16 *)(image->getOutputData(depth));
-//            int max = pixelData[0];
-//            if (pixelData != NULL) {
-//                for (int i = 0; i < height; ++i) {
-//                    for (int j = 0; j < width; ++j) {
-//                        int value = pixelData[i*j];
-//                        if (value > max) {
-//                            max = value;
-//                        }
-//                        imageArray[i][j] = value;
-//                    }
-//                }
-//            }
-
-            // TODO
             const DiPixel* pixel = image->getInterData();
             for (int i = 0; i < height; ++i) {
                 for (int j = 0; j < width; ++j) {

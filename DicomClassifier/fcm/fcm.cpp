@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
+#include <fstream>
 #include <vector>
 
 using namespace std;
@@ -13,8 +14,6 @@ FCM::FCM(double fuzziness, double epsilon)
 {
     this->fuzziness = fuzziness;
     this->epsilon = epsilon;
-
-
 }
 
 void FCM::init(double **data, int clusters, int num_points, int num_dimensions)
@@ -102,6 +101,97 @@ double **FCM::getMembershipMatrix()
     return membershipMatrix;
 }
 
+void FCM::saveMembershipMatrixU(const char* name)
+{
+        double **U;
+        U = getMembershipMatrix();
+        std::ofstream output_file2(name);
+        for (int i = 0; i < num_dimensions; ++i) {
+            for (int j = 0; j < num_clusters; ++j) {
+    //            cout << U[i][j] << " " ;
+                output_file2 << U[i][j] << "," ;
+            }
+            output_file2  << "\n";
+    //        cout << endl;
+        }
+        output_file2.close();
+
+}
+
+void FCM::saveCenters(const char *name)
+{
+    double **centers;
+    centers = getCenters();
+
+    std::ofstream output_file(name);
+
+//     Save results as csv
+    for (int i = 0; i < num_clusters; ++i) {
+        for (int j = 0; j < num_dimensions; ++j) {
+            output_file << centers[i][j] << ",";
+        }
+        output_file << "\n";
+    }
+    output_file.close();
+
+}
+
+double FCM::getCenterAVG()
+{
+    double avg = 0;
+    double **centers;
+    centers = getCenters();
+
+    for (int i = 0; i < num_clusters; ++i) {
+        for (int j = 0; j < num_dimensions; ++j) {
+            avg += centers[i][j];
+        }
+    }
+
+    avg = avg / (num_clusters * num_dimensions);
+
+    return avg;
+}
+
+void FCM::saveClusters(const char* prefix)
+{
+    int i, j, cluster;
+    char fname[100];
+    double highest;
+    FILE * f[MAX_CLUSTER];
+
+    for (j = 0; j < num_clusters; j++) {
+        sprintf(fname, "cluster.%d", j);
+        if ((f[j] = fopen(fname, "w")) == NULL) {
+            printf("Could not create %s\n", fname);
+            for (i = 0; i < j; i++) {
+                fclose(f[i]);
+                sprintf(fname, "cluster.%d", i);
+                remove(fname);
+            }
+            return;
+        }
+        fprintf(f[j], "#Data points for cluster: %d\n", j);
+    }
+    for (i = 0; i < num_data_points; i++) {
+        cluster = 0;
+        highest = 0.0;
+        for (j = 0; j < num_clusters; j++) {
+            if (degree_of_memb[i][j] > highest) {
+                highest = degree_of_memb[i][j];
+                cluster = j;
+            }
+        }
+//        fprintf(f[cluster], "%lf %lf\n", data_point[i][0], data_point[i][1]);
+        fprintf(f[cluster], "%d\n", i); // save index of point cluster
+    }
+
+    for (j = 0; j < num_clusters; j++) {
+           fclose(f[j]);
+       }
+
+}
+
 void FCM::calculate_centre_vectors() {
     int i, j, k;
     double numerator, denominator;
@@ -164,3 +254,4 @@ double FCM::get_norm(int i, int j) {
     }
     return sqrt(sum);
 }
+

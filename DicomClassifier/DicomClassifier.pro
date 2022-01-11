@@ -23,7 +23,10 @@ LIBS += -lpthread
 
 
 SOURCES += \
+    benchmark/memcount.cpp \
+    benchmark/system_metrics.cpp \
     dicom/DicomReader.cpp \
+    dicom/dicomutils.cpp \
     knn/Preprocessing.cpp \
     knn/ReadDataset.cpp \
     knn/dataset.cpp \
@@ -44,14 +47,14 @@ SOURCES += \
     random_forest/TreeSurvival.cpp \
     random_forest/utility.cpp \
     svm/svm.cpp \
-    fcm/fcm.cpp \
-    gbdt/Classifier.cxx \
-    gbdt/FastBDT.cxx \
-    gbdt/FastBDT_IO.cxx
+    fcm/fcm.cpp
 
 
 HEADERS += \
+    benchmark/memcount.hpp \
+    benchmark/system_metrics.hpp \
     dicom/DicomReader.h \
+    dicom/dicomutils.h \
     knn/Preprocessing.h \
     knn/ReadDataset.h \
     knn/dataset.h \
@@ -61,7 +64,6 @@ HEADERS += \
     knn/matrix.h \
     svm/svm.h \
     fcm/fcm.h \
-    gbdt/Classifier.h \
     kmeans/kmeans.h
 
 

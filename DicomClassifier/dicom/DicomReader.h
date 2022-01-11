@@ -22,6 +22,8 @@ public:
     int **getImageArray(int depth);
     void saveCSV(const char *filename, int **data);
 
+    void clear();
+
     std::vector<std::vector<int>> getIntImageMatrix(int depth);
 
     std::vector<std::vector<float>> getFloatImageMatrix(int depth);
@@ -29,6 +31,7 @@ public:
     std::vector<std::vector<double>> getDoubleImageMatrix(int depth);
 
     void saveData(std::vector<std::vector<int>> data, const char* filename, std::string delimiter, bool header);
+
 
 };
 
