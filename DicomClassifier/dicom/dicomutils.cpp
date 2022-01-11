@@ -3,6 +3,8 @@
 #include <dirent.h>
 #include <fstream>
 
+#include "kmeans/kmeans.h"
+
 using namespace std;
 
 // Return list with path of dicom files
@@ -90,5 +92,40 @@ double **DicomUtils::asFCMPointsData(int **arr, int numPoints, int numDims)
 // alg_param: media del parametro a evaluar
 void DicomUtils::writeMetrics(ofstream &file, int i, string filename, double cpu, int mem, double time, double param)
 {
-        file << i << "," << filename << "," << cpu << "," << mem << "," << time << "," << param << endl;
+    file << i << "," << filename << "," << cpu << "," << mem << "," << time << "," << param << endl;
+}
+
+vector<Point> DicomUtils::getKMeansPoints(vector<vector<double> > data)
+{
+    vector<Point> all_points;
+    for (int i = 0; i < data.size(); ++i) {
+        Point point(i+1, data[i]);
+        all_points.push_back(point);
+    }
+    return all_points;
+}
+
+vector<Point> DicomUtils::getKMeansFilePoints(string filename)
+{
+    ifstream infile(filename.c_str());
+    if (!infile.is_open())
+    {
+        cout << "Error: Failed to open file: " << filename << endl;
+        return {};
+    }
+    int pointId = 1;
+    vector<Point> all_points;
+    string line;
+
+    while (getline(infile, line))
+    {
+        Point point(pointId, line);
+        all_points.push_back(point);
+        pointId++;
+    }
+
+    infile.close();
+    cout << "\nData fetched successfully!" << endl;
+
+    return all_points;
 }

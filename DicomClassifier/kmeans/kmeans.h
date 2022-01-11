@@ -54,6 +54,13 @@ public:
         clusterId = 0; // Initially not assigned to any cluster
     }
 
+    Point(int id, vector<double> dataPoints) {
+        pointId = id;
+        values = dataPoints;
+        dimensions = dataPoints.size();
+        clusterId = 0;
+    }
+
     int getDimensions() { return dimensions; }
 
     int getCluster() { return clusterId; }
@@ -141,12 +148,12 @@ private:
         }
         else
         {
-          for (int i = 0; i < dimensions; i++)
-          {
-             sum += pow(clusters[0].getCentroidByPos(i) - point.getVal(i), 2.0);
-             // sum += abs(clusters[0].getCentroidByPos(i) - point.getVal(i));
-          }
-          min_dist = sqrt(sum);
+            for (int i = 0; i < dimensions; i++)
+            {
+                sum += pow(clusters[0].getCentroidByPos(i) - point.getVal(i), 2.0);
+                // sum += abs(clusters[0].getCentroidByPos(i) - point.getVal(i));
+            }
+            min_dist = sqrt(sum);
         }
         NearestClusterId = clusters[0].getId();
 
@@ -156,17 +163,17 @@ private:
             sum = 0.0;
 
             if(dimensions==1) {
-                  dist = abs(clusters[i].getCentroidByPos(0) - point.getVal(0));
+                dist = abs(clusters[i].getCentroidByPos(0) - point.getVal(0));
             }
             else {
-              for (int j = 0; j < dimensions; j++)
-              {
-                  sum += pow(clusters[i].getCentroidByPos(j) - point.getVal(j), 2.0);
-                  // sum += abs(clusters[i].getCentroidByPos(j) - point.getVal(j));
-              }
+                for (int j = 0; j < dimensions; j++)
+                {
+                    sum += pow(clusters[i].getCentroidByPos(j) - point.getVal(j), 2.0);
+                    // sum += abs(clusters[i].getCentroidByPos(j) - point.getVal(j));
+                }
 
-              dist = sqrt(sum);
-              // dist = sum;
+                dist = sqrt(sum);
+                // dist = sum;
             }
             if (dist < min_dist)
             {
@@ -187,6 +194,7 @@ public:
     }
 
     void run(vector<Point> &all_points)
+
     {
         total_points = all_points.size();
         dimensions = all_points[0].getDimensions();
@@ -201,7 +209,7 @@ public:
                 int index = rand() % total_points;
 
                 if (find(used_pointIds.begin(), used_pointIds.end(), index) ==
-                    used_pointIds.end())
+                        used_pointIds.end())
                 {
                     used_pointIds.push_back(index);
                     all_points[index].setCluster(i);
@@ -211,8 +219,7 @@ public:
                 }
             }
         }
-        cout << "Clusters initialized = " << clusters.size() << endl
-             << endl;
+        //        cout << "Clusters initialized = " << clusters.size() << endl << endl;
 
         cout << "Running K-Means Clustering.." << endl;
 
@@ -223,7 +230,7 @@ public:
             bool done = true;
 
             // Add all points to their nearest cluster
-            #pragma omp parallel for reduction(&&: done) num_threads(16)
+#pragma omp parallel for reduction(&&: done) num_threads(16)
             for (int i = 0; i < total_points; i++)
             {
                 int currentClusterId = all_points[i].getCluster();
@@ -256,7 +263,7 @@ public:
                     double sum = 0.0;
                     if (ClusterSize > 0)
                     {
-                        #pragma omp parallel for reduction(+: sum) num_threads(16)
+#pragma omp parallel for reduction(+: sum) num_threads(16)
                         for (int p = 0; p < ClusterSize; p++)
                         {
                             sum += clusters[i].getPoint(p).getVal(j);
@@ -275,8 +282,18 @@ public:
             iter++;
         }
 
+
+    }
+
+    vector<Cluster> getClustersValues() {
+        return clusters;
+    }
+
+    void savePoints(vector<Point> &all_points ,string &prefix) {
+
+        // Write Points
         ofstream pointsFile;
-        pointsFile.open(output_dir + "/" + to_string(K) + "-points.txt", ios::out);
+        pointsFile.open(output_dir + "/" + prefix + to_string(K) + "-points.txt", ios::out);
 
         for (int i = 0; i < total_points; i++)
         {
@@ -285,20 +302,25 @@ public:
 
         pointsFile.close();
 
+        return;
+    }
+
+    void saveClusters(string &prefix) {
         // Write cluster centers to file
         ofstream outfile;
-        outfile.open(output_dir + "/" + to_string(K) + "-clusters.txt");
+
+        outfile.open(output_dir + "/" + prefix +to_string(K) + "-clusters.txt");
         if (outfile.is_open())
         {
             for (int i = 0; i < K; i++)
             {
-                cout << "Cluster " << clusters[i].getId() << " centroid : ";
+//                cout << "Cluster " << clusters[i].getId() << " centroid : ";
                 for (int j = 0; j < dimensions; j++)
                 {
-                    cout << clusters[i].getCentroidByPos(j) << " ";    // Output to console
+//                    cout << clusters[i].getCentroidByPos(j) << " ";    // Output to console
                     outfile << clusters[i].getCentroidByPos(j) << " "; // Output to file
                 }
-                cout << endl;
+//                cout << endl;
                 outfile << endl;
             }
             outfile.close();
@@ -307,6 +329,19 @@ public:
         {
             cout << "Error: Unable to write to clusters.txt";
         }
+
+        return;
+    }
+
+    double getAvgClusters() {
+
+        double accum = 0;
+        for (int i = 0; i < K; i++) {
+            for (int j = 0; j < dimensions; j++) {
+                accum = accum + clusters[i].getCentroidByPos(j);
+            }
+        }
+        return accum / (K*dimensions);
     }
 };
 
