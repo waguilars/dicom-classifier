@@ -56,6 +56,11 @@ std::vector<std::vector<float> > DicomReader::getFloatImageMatrix(int depth)
         imageMatrix.push_back(row);
     }
 
+    for (int i = 0; i < this->height; ++i) {
+        delete[] imageArr[i];
+    }
+    delete[] imageArr;
+
     return imageMatrix;
 
 }
@@ -74,6 +79,11 @@ std::vector<std::vector<double> > DicomReader::getDoubleImageMatrix(int depth)
         }
         imageMatrix.push_back(row);
     }
+
+    for (int i = 0; i < this->height; ++i) {
+        delete[] imageArr[i];
+    }
+    delete[] imageArr;
 
     return imageMatrix;
 
@@ -155,7 +165,6 @@ int **DicomReader::getImageArray(int depth = 16) {
     return imageArray;
 }
 
-
 std::vector<std::vector<int>> DicomReader::getIntImageMatrix(int depth)
 {
     int **imageArr = this->getImageArray(depth);
@@ -169,6 +178,11 @@ std::vector<std::vector<int>> DicomReader::getIntImageMatrix(int depth)
         }
         imageMatrix.push_back(row);
     }
+
+    for (int i = 0; i < this->height; ++i) {
+        delete[] imageArr[i];
+    }
+    delete[] imageArr;
 
     return imageMatrix;
 
