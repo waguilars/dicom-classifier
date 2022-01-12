@@ -105,6 +105,30 @@ vector<Point> DicomUtils::getKMeansPoints(vector<vector<double> > data)
     return all_points;
 }
 
+vector<int> DicomUtils::readLabels(string filename, string delimiter)
+{
+    ifstream file(filename);
+    string line = "";
+    vector<int> labels;
+
+    // Read label values and push to vector
+    while (getline(file, line))
+    {
+        size_t pos = 0;
+        string token;
+        while ((pos = line.find(delimiter)) != string::npos) {
+            token = line.substr(0, pos);
+            line.erase(0, pos + delimiter.length());
+            labels.push_back(stoi(token) );
+        }
+        labels.push_back(stoi(line));
+    }
+    // Close the File
+    file.close();
+
+    return labels;
+}
+
 vector<Point> DicomUtils::getKMeansFilePoints(string filename)
 {
     ifstream infile(filename.c_str());

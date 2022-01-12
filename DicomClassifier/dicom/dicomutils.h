@@ -23,6 +23,8 @@ public:
     static vector<Point> getKMeansFilePoints(string filename);
     static vector<Point> getKMeansPoints(vector<vector<double>> data);
 
+    static vector<int> readLabels(string filename, string delimiter);
+
 };
 
 #endif // DICOMUTILS_H

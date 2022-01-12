@@ -45,6 +45,7 @@ SOURCES += \
     random_forest/TreeProbability.cpp \
     random_forest/TreeRegression.cpp \
     random_forest/TreeSurvival.cpp \
+    random_forest/rf.cpp \
     random_forest/utility.cpp \
     svm/svm.cpp \
     fcm/fcm.cpp
@@ -62,6 +63,7 @@ HEADERS += \
     knn/knn.h \
     knn/knnUtils.h \
     knn/matrix.h \
+    random_forest/rf.h \
     svm/svm.h \
     fcm/fcm.h \
     kmeans/kmeans.h
