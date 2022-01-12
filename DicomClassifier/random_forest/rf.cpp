@@ -8,12 +8,13 @@
 
 using namespace std;
 
-RF::RF()
+RF::RF(int trees = DEFAULT_NUM_TREE)
 {
     std::unique_ptr<Forest> forest { };
 
     this->forest= ranger::make_unique<ForestClassification>();
     // Default Config to predict
+    this->totalTrees = trees;
     this->mtry = 0;
     this->mode = MEM_DOUBLE;
     this->outprefix = "random_forest";
@@ -56,7 +57,7 @@ void RF::predict(vector<vector<double> > data, vector<int> target, bool showOutp
 void RF::init(bool showOutput)
 {
     if (showOutput) {
-        this->forest->initCpp("LABEL", mode, filename, mtry, outprefix, DEFAULT_NUM_TREE, &std::cout,
+        this->forest->initCpp("LABEL", mode, filename, mtry, outprefix, totalTrees, &std::cout,
                               default_seed, DEFAULT_NUM_THREADS,predict_file, DEFAULT_IMPORTANCE_MODE, DEFAULT_MIN_NODE_SIZE_CLASSIFICATION,
                               split_weights_file, split_vars, status_var_name, replacement, cat_vars, save_memory,
                               DEFAULT_SPLITRULE, weights_file, predall, samplefraction, DEFAULT_ALPHA,
@@ -64,7 +65,7 @@ void RF::init(bool showOutput)
                               DEFAULT_MAXDEPTH, reg_factor, reg_usedepth);
 
     } else {
-        this->forest->initCpp("LABEL", mode, filename, mtry, outprefix, DEFAULT_NUM_TREE, NULL,
+        this->forest->initCpp("LABEL", mode, filename, mtry, outprefix, totalTrees, NULL,
                               default_seed, DEFAULT_NUM_THREADS,predict_file, DEFAULT_IMPORTANCE_MODE, DEFAULT_MIN_NODE_SIZE_CLASSIFICATION,
                               split_weights_file, split_vars, status_var_name, replacement, cat_vars, save_memory,
                               DEFAULT_SPLITRULE, weights_file, predall, samplefraction, DEFAULT_ALPHA,

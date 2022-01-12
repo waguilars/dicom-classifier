@@ -16,8 +16,9 @@ class RF
 {
 public:
     std::unique_ptr<Forest> forest;
+    int totalTrees;
 
-    RF();
+    RF(int trees);
     ~RF();
 
     void setTrainData(vector<vector<double>> data, vector<int> target);
