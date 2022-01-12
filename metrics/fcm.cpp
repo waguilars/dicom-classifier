@@ -18,7 +18,8 @@ int main()
     systemMetrics performance("perf");
 
     ofstream metrics;
-    metrics.open("fuzzycmeans.metrics.csv");
+//    outfile.open("test.txt", std::ios_base::app); // For overwrite
+    metrics.open("fuzzycmeans.metrics.csv", ios_base::app); // Append
     metrics << "i,nombre,CPU(%),memoria(kB),tiempo(s),err_c\n";
 
     const char* dir = "/home/will/Downloads/dicom-tesis/dicom-metrics";
@@ -51,14 +52,23 @@ int main()
 
         double cavg = fcm->getCenterAVG();
 
-        //        // Take performance metrics
+        // Take performance metrics
         performance.calculate();
         double cpu = performance.getCpuPercent();
         int mem = getRamUsage();
         double totalSeconds = performance.getDurationInSeconds();
 
         DicomUtils::writeMetrics(metrics, id, filename, cpu, mem, totalSeconds, cavg);
+
+        // Clear memory
         img.clear();
+        delete fcm;
+        for (int i = 0; i < rows; ++i) {
+            delete[] data[i];
+            delete[] arr[i];
+        }
+        delete[] data;
+        delete[] arr;
     }
 
 
@@ -67,6 +77,6 @@ int main()
 //    fcm->saveCenters("test.centers.csv");
 //    fcm->saveMembershipMatrixU("test.memU.csv");
 
-  return 0;
+   return 0;
 }
 

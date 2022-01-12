@@ -20,7 +20,7 @@ int main() {
 
     vector<string> dcmFiles= DicomUtils::getDicomFilesPath(dir);
 
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < dcmFiles.size(); ++i) {
         performance.resetCounters();
 
         // add image to dataset
@@ -33,15 +33,10 @@ int main() {
         vector<vector<double>> data = img.getDoubleImageMatrix(12);
         vector<Point> all_points = DicomUtils::getKMeansPoints(data);
 
-        int k = 2;
-        // Return if number of clusters > number of points
-        if ((int)all_points.size() < k)
-        {
-            cout << "Error: Number of clusters greater than number of points." << endl;
-            return 1;
-        }
 
-        // Running K-Means Clustering
+        int k = 2;
+
+//         Running K-Means Clustering
         int iters = 5;
         KMeans kmeans(k, iters, ".");
         kmeans.run(all_points); // last
