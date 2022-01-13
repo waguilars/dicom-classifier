@@ -78,6 +78,50 @@ void performance::eval_fcm(vector<string> dicomDir, bool append)
 void performance::eval_kmeans(vector<string> dicomDir, bool append)
 {
 
+    systemMetrics performance("perf");
+
+    ofstream metrics;
+    if (append) {
+            metrics.open("kmeans.metrics.csv", ios_base::app); // Append
+        } else {
+            metrics.open("kmeans.metrics.csv"); // Append
+        }
+
+    metrics << "i,nombre,CPU(%),memoria(kB),tiempo(ms)"<<endl;
+
+
+    for (int i = 0; i < dicomDir.size(); ++i) {
+        performance.resetCounters();
+
+        // add image to dataset
+        string filename = DicomUtils::base_name(dicomDir[i], "/");
+        int id = i+1;
+        cout << "processing: " << id << ". "<< filename << "........." << endl;
+
+        DicomReader img(dicomDir[i].c_str());
+
+        vector<vector<double>> data = img.getDoubleImageMatrix(12);
+        vector<Point> all_points = DicomUtils::getKMeansPoints(data);
+
+        int k = 2;
+
+        // Running K-Means Clustering
+        int iters = 5;
+        KMeans kmeans(k, iters, ".");
+        kmeans.run(all_points); // last
+
+        double avg = kmeans.getAvgClusters();
+        performance.calculate();
+        double cpu = performance.getCpuPercent();
+        int mem = getRamUsage();
+        double totalSeconds = performance.getDurationInMiliseconds();
+
+        writePerfMetrics(metrics, id, filename, cpu, mem, totalSeconds);
+        img.clear();
+    }
+
+    metrics.close();
+
 }
 
 void performance::eval_random_forest(vector<string> dcmFiles, const char *targetValuesDir, bool append)
