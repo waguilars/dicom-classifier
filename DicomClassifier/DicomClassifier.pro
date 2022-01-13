@@ -33,6 +33,7 @@ SOURCES += \
     knn/knn.cpp \
     knn/knnresults.cpp \
     knn/matrix.cpp \
+    metrics/performance.cpp \
     random_forest/ArgumentHandler.cpp \
     random_forest/Data.cpp \
     random_forest/Forest.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     knn/knn.h \
     knn/knnUtils.h \
     knn/matrix.h \
+    metrics/performance.h \
     random_forest/rf.h \
     svm/svm.h \
     fcm/fcm.h \

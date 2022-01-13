@@ -7,7 +7,6 @@
 
 using namespace std;
 
-// Return list with path of dicom files
 vector<string> DicomUtils::getDicomFilesPath(const char *path) {
     vector<string> files;
     struct dirent *d;
@@ -33,6 +32,52 @@ vector<string> DicomUtils::getDicomFilesPath(const char *path) {
     }
     return files;
 }
+
+vector<int> DicomUtils::getDicomTargetRoi(const char *path, string dicomFilePath)
+{
+    vector<int> target;
+    struct dirent *d;
+    DIR *dr;
+    dr = opendir(path);
+    if(dr!=NULL)
+    {
+
+        for(d=readdir(dr); d!=NULL; d=readdir(dr))
+        {
+            string filename = d->d_name;
+
+            if(filename.substr(filename.find_last_of(".") + 1) == "target") {
+                // remove ext from .target
+                size_t lastindex = filename.find_last_of(".");
+                string targetraw = filename.substr(0, lastindex);
+
+
+                // remove ext from dicom file
+                size_t lastindex2 = dicomFilePath.find_last_of(".");
+                string dicomraw = dicomFilePath.substr(0, lastindex2);
+
+                // if exist target file load it else load test values
+                if(dicomraw == targetraw) {
+                    string targetpath = string(path)+"/"+filename.c_str();
+                    target = DicomUtils::readLabels(targetpath, ",");
+
+                }
+            }
+        }
+        closedir(dr);
+    }
+    else {
+        cout<<"\nError Occurred when reading dir!" << endl;
+        return target;
+    }
+
+    return target;
+
+
+
+}
+
+
 
 // return width for the data set
 int DicomUtils::getDataWidth(vector<string> dicomFiles)

@@ -13,7 +13,14 @@ class DicomUtils
 {
 public:
     DicomUtils();
+    // Return list with path of dicom files
     static vector<string> getDicomFilesPath(const char *path);
+
+    // Read labels generated based on the roi ([filename].target)
+    // path -> directory of target values
+    // DicomFile path -> Path of dicom file to get target values
+    static vector<int> getDicomTargetRoi(const char *path, string dicomFilePath);
+
     static int getDataWidth(vector<string> dicomFiles);
     static int getDataHeight(vector<string> dicomFiles);
     static string base_name(string const & path, string const &delims);
