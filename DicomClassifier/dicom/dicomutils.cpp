@@ -129,6 +129,22 @@ vector<int> DicomUtils::readLabels(string filename, string delimiter)
     return labels;
 }
 
+vector<int> DicomUtils::genTargetValues(vector<vector<double> > data, int numClass)
+{
+    vector<int> values;
+    for (size_t i = 0; i < data.size(); ++i) {
+        double n = 0;
+        for (size_t j = 0; j < data[0].size(); ++j) {
+            n += data[i][j];
+        }
+
+        int m =(int)(n/data.size());
+        values.push_back(m%numClass);
+    }
+
+    return values;
+}
+
 vector<Point> DicomUtils::getKMeansFilePoints(string filename)
 {
     ifstream infile(filename.c_str());

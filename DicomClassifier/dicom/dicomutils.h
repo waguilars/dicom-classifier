@@ -25,6 +25,8 @@ public:
 
     static vector<int> readLabels(string filename, string delimiter);
 
+    static vector<int> genTargetValues(vector<vector<double>> data, int numClass);
+
 };
 
 #endif // DICOMUTILS_H
