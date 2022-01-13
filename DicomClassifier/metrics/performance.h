@@ -20,6 +20,8 @@ public:
 
     static void eval_kmeans(vector<string> dicomDir, bool append);
 
+    static void eval_random_forest(vector<string> dcmFiles, const char* targetValuesDir, bool append);
+
 private:
     static void writePerfMetrics(ofstream &file, int i, string filename, double cpu, int mem, double time);
 };
