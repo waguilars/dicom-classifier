@@ -90,7 +90,7 @@ void performance::eval_kmeans(vector<string> dicomDir, bool append)
     metrics << "i,nombre,CPU(%),memoria(kB),tiempo(ms)"<<endl;
 
 
-    for (int i = 0; i < dicomDir.size(); ++i) {
+    for (size_t i = 0; i < dicomDir.size(); ++i) {
         performance.resetCounters();
 
         // add image to dataset

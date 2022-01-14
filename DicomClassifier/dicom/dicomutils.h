@@ -34,6 +34,15 @@ public:
 
     static vector<int> genTargetValues(vector<vector<double>> data, int numClass);
 
+    static vector<int> genTestDataIdx(vector<vector<double>> data, int size);
+
+    // Generate values and labels for testing using index
+    static vector<int> getTestingLabels(vector<int>labels, vector<int> indexes);
+    static vector<vector<double>> getTestingValues(vector<vector<double>> data, vector<int> indexes);
+
+    // Parse to KNN input values
+    static double *parseKNNData(vector<vector<double>>data);
+    static int *parseKNNLabels(vector<int> labels);
 };
 
 #endif // DICOMUTILS_H

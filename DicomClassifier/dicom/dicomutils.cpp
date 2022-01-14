@@ -190,6 +190,77 @@ vector<int> DicomUtils::genTargetValues(vector<vector<double> > data, int numCla
     return values;
 }
 
+vector<int> DicomUtils::genTestDataIdx(vector<vector<double>> data, int size)
+{
+
+    vector<int> idx;
+    int max = data.size()-1;
+    int min = 0;
+    int range = max - min + 1;
+
+    for (int i = 0; i < size; ++i) {
+        int num = rand() % range + min;
+        idx.push_back(num);
+    }
+
+    return idx;
+
+}
+
+vector<int> DicomUtils::getTestingLabels(vector<int> labels, vector<int> indexes)
+{
+
+    vector<int> testingLabels;
+
+    for (size_t i = 0; i < indexes.size(); ++i) {
+        testingLabels.push_back(labels[indexes[i]]);
+    }
+
+    return testingLabels;
+
+}
+
+vector<vector<double> > DicomUtils::getTestingValues(vector<vector<double> > data, vector<int> indexes)
+{
+    vector<vector<double>> testingValues;
+    for (size_t i = 0; i < indexes.size(); ++i) {
+        testingValues.push_back(data[indexes[i]]);
+    }
+
+    return testingValues;
+
+}
+
+double *DicomUtils::parseKNNData(vector<vector<double> > data)
+{
+    int rows = data.size();
+    int cols = data[0].size();
+    double *trainData = new double[rows*cols];
+
+    int k = 0;
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            trainData[k] = data[i][j];
+            k++;
+        }
+    }
+
+    return trainData;
+}
+
+int *DicomUtils::parseKNNLabels(vector<int> labels)
+{
+    int rows = labels.size();
+    int *trainLabels = new int[rows];
+    for (int i = 0; i < labels.size(); ++i) {
+        trainLabels[i] = labels[i];
+    }
+
+    return trainLabels;
+}
+
+
+
 vector<Point> DicomUtils::getKMeansFilePoints(string filename)
 {
     ifstream infile(filename.c_str());
