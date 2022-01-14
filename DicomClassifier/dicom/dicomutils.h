@@ -43,6 +43,11 @@ public:
     // Parse to KNN input values
     static double *parseKNNData(vector<vector<double>>data);
     static int *parseKNNLabels(vector<int> labels);
+
+    // Save vector label
+    static void saveFile(vector<int> dataList, string delimiter, string filename);
+    // Save matrix data
+    static void saveData(std::vector<std::vector<double> > data, string delimiter, string filename, bool header);
 };
 
 #endif // DICOMUTILS_H

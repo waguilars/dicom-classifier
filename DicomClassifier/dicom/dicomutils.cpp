@@ -77,8 +77,6 @@ vector<int> DicomUtils::getDicomTargetRoi(const char *path, string dicomFilePath
 
 }
 
-
-
 // return width for the data set
 int DicomUtils::getDataWidth(vector<string> dicomFiles)
 {
@@ -259,6 +257,51 @@ int *DicomUtils::parseKNNLabels(vector<int> labels)
     return trainLabels;
 }
 
+void DicomUtils::saveFile(vector<int> dataList, string delimiter, string filename)
+{
+    ofstream myfile;
+    myfile.open (filename);
+
+    for (int i = 0; i < dataList.size(); ++i) {
+        if (i == dataList.size()-1) {
+            myfile << dataList[i];
+        } else {
+            myfile << dataList[i] << delimiter;
+        }
+
+    }
+    myfile.close();
+
+}
+
+void DicomUtils::saveData(std::vector<std::vector<double> > data, string delimiter, string filename, bool header)
+{
+
+    std::ofstream output_file(filename);
+    // Write header
+    if (header) {
+        for (size_t i = 0; i < data[0].size(); ++i) {
+            if (i == data[0].size() - 1) {
+                output_file << "LABEL" << endl;
+            } else {
+                output_file << "X" << i << delimiter;
+            }
+        }
+    }
+
+    // Write data
+    for (const auto &row : data) {
+        for (size_t i = 0; i < row.size(); ++i) {
+            if (i == row.size() - 1) {
+                output_file << row[i];
+            } else {
+                output_file << row [i] << delimiter;
+            }
+        }
+        output_file << "\n";
+    }
+    output_file.close();
+}
 
 
 vector<Point> DicomUtils::getKMeansFilePoints(string filename)

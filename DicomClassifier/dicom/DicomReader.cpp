@@ -107,9 +107,7 @@ void DicomReader::saveData(std::vector<std::vector<int> > data, const char *file
 
     // Write data
     for (const auto &row : data) {
-
         for (size_t i = 0; i < row.size(); ++i) {
-
             if (i == row.size() - 1) {
                 output_file << row[i];
             } else {
@@ -118,7 +116,6 @@ void DicomReader::saveData(std::vector<std::vector<int> > data, const char *file
         }
         output_file << "\n";
     }
-
 }
 
 int DicomReader::getWidth() { return this->width; }
