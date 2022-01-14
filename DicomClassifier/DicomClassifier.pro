@@ -49,7 +49,8 @@ SOURCES += \
     random_forest/rf.cpp \
     random_forest/utility.cpp \
     svm/svm.cpp \
-    fcm/fcm.cpp
+    fcm/fcm.cpp \
+    svm/svm_util.cpp
 
 
 HEADERS += \
@@ -68,7 +69,8 @@ HEADERS += \
     random_forest/rf.h \
     svm/svm.h \
     fcm/fcm.h \
-    kmeans/kmeans.h
+    kmeans/kmeans.h \
+    svm/svm_util.h
 
 
 

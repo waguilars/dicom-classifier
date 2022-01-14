@@ -33,12 +33,16 @@ public:
     static vector<int> readLabels(string filename, string delimiter);
 
     static vector<int> genTargetValues(vector<vector<double>> data, int numClass);
+    static vector<int> genTargetValuesInt(vector<vector<int>> data, int numClass);
+
 
     static vector<int> genTestDataIdx(vector<vector<double>> data, int size);
+    static vector<int> genTestDataIdxInt(vector<vector<int>> data, int size);
 
     // Generate values and labels for testing using index
     static vector<int> getTestingLabels(vector<int>labels, vector<int> indexes);
     static vector<vector<double>> getTestingValues(vector<vector<double>> data, vector<int> indexes);
+    static vector<vector<int>> getTestingValuesInt(vector<vector<int>> data, vector<int> indexes);
 
     // Parse to KNN input values
     static double *parseKNNData(vector<vector<double>>data);
@@ -47,7 +51,9 @@ public:
     // Save vector label
     static void saveFile(vector<int> dataList, string delimiter, string filename);
     // Save matrix data
-    static void saveData(std::vector<std::vector<double> > data, string delimiter, string filename, bool header);
+    static void saveData(std::vector<std::vector<double>> data, string delimiter, string filename, bool header);
+    static void saveDataInt(std::vector<std::vector<int>> data, string delimiter, string filename, bool header);
+
 };
 
 #endif // DICOMUTILS_H

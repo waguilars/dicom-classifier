@@ -45,7 +45,7 @@ void RF::setTrainData(vector<vector<double> > data, vector<int> target)
     this->filename = this->generateDataFormat(data, target); //// Needs filename train
 }
 
-void RF::predict(vector<vector<double> > data, vector<int> target, bool showOutput)
+void RF::predict(vector<vector<double>> data, vector<int> target, bool showOutput)
 {
     this->predict_file = this->generateDataFormat(data, target); //// Needs filename train or test
 
@@ -78,7 +78,6 @@ string RF::generateDataFormat(vector<vector<double>> data, vector<int> target)
 {
     string filename = "temp.data";
     string delimiter = " ";
-
 
     if (data.size() != target.size()) {
         string message = "Data dimension and target size must be equal";

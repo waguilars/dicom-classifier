@@ -188,9 +188,24 @@ vector<int> DicomUtils::genTargetValues(vector<vector<double> > data, int numCla
     return values;
 }
 
+vector<int> DicomUtils::genTargetValuesInt(vector<vector<int> > data, int numClass)
+{
+    vector<int> values;
+    for (size_t i = 0; i < data.size(); ++i) {
+        double n = 0;
+        for (size_t j = 0; j < data[0].size(); ++j) {
+            n += data[i][j];
+        }
+
+        int m =(int)(n/data.size());
+        values.push_back(m%numClass);
+    }
+
+    return values;
+}
+
 vector<int> DicomUtils::genTestDataIdx(vector<vector<double>> data, int size)
 {
-
     vector<int> idx;
     int max = data.size()-1;
     int min = 0;
@@ -203,6 +218,21 @@ vector<int> DicomUtils::genTestDataIdx(vector<vector<double>> data, int size)
 
     return idx;
 
+}
+
+vector<int> DicomUtils::genTestDataIdxInt(vector<vector<int> > data, int size)
+{
+    vector<int> idx;
+    int max = data.size()-1;
+    int min = 0;
+    int range = max - min + 1;
+
+    for (int i = 0; i < size; ++i) {
+        int num = rand() % range + min;
+        idx.push_back(num);
+    }
+
+    return idx;
 }
 
 vector<int> DicomUtils::getTestingLabels(vector<int> labels, vector<int> indexes)
@@ -218,7 +248,7 @@ vector<int> DicomUtils::getTestingLabels(vector<int> labels, vector<int> indexes
 
 }
 
-vector<vector<double> > DicomUtils::getTestingValues(vector<vector<double> > data, vector<int> indexes)
+vector<vector<double> > DicomUtils::getTestingValues(vector<vector<double>> data, vector<int> indexes)
 {
     vector<vector<double>> testingValues;
     for (size_t i = 0; i < indexes.size(); ++i) {
@@ -227,6 +257,16 @@ vector<vector<double> > DicomUtils::getTestingValues(vector<vector<double> > dat
 
     return testingValues;
 
+}
+
+vector<vector<int> > DicomUtils::getTestingValuesInt(vector<vector<int>> data, vector<int> indexes)
+{
+    vector<vector<int>> testingValues;
+    for (size_t i = 0; i < indexes.size(); ++i) {
+        testingValues.push_back(data[indexes[i]]);
+    }
+
+    return testingValues;
 }
 
 double *DicomUtils::parseKNNData(vector<vector<double> > data)
@@ -301,6 +341,35 @@ void DicomUtils::saveData(std::vector<std::vector<double> > data, string delimit
         output_file << "\n";
     }
     output_file.close();
+}
+
+void DicomUtils::saveDataInt(std::vector<std::vector<int> > data, string delimiter, string filename, bool header)
+{
+    std::ofstream output_file(filename);
+    // Write header
+    if (header) {
+        for (size_t i = 0; i < data[0].size(); ++i) {
+            if (i == data[0].size() - 1) {
+                output_file << "LABEL" << endl;
+            } else {
+                output_file << "X" << i << delimiter;
+            }
+        }
+    }
+
+    // Write data
+    for (const auto &row : data) {
+        for (size_t i = 0; i < row.size(); ++i) {
+            if (i == row.size() - 1) {
+                output_file << row[i];
+            } else {
+                output_file << row [i] << delimiter;
+            }
+        }
+        output_file << "\n";
+    }
+    output_file.close();
+
 }
 
 
