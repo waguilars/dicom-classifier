@@ -2,6 +2,8 @@
 #include "DicomReader.h"
 #include <dirent.h>
 #include <fstream>
+#include <sstream>
+
 
 #include "kmeans/kmeans.h"
 
@@ -31,6 +33,65 @@ vector<string> DicomUtils::getDicomFilesPath(const char *path) {
         return files;
     }
     return files;
+}
+
+vector<string> DicomUtils::makeDicomFilesPath(string dicomDirectory, string summaryFile)
+{
+    vector<string> dcmFiles;
+    string line;
+
+    fstream file (summaryFile, ios::in);
+    if(file.is_open())
+    {
+        while(getline(file, line))
+        {
+            vector<string> content;
+            stringstream str(line);
+            string word;
+
+            while(getline(str, word, ','))
+                content.push_back(word);
+
+            string fullpath = dicomDirectory + "/" + content[0];
+            dcmFiles.push_back(fullpath);
+
+        }
+    }
+    else
+        cout<<"Could not open the file\n";
+
+    file.close();
+
+    return dcmFiles;
+}
+
+vector<int> DicomUtils::makeDicomLabels(string filepath)
+{
+    vector<int> dcmLabels;
+    string line;
+
+    fstream file (filepath, ios::in);
+    if(file.is_open())
+    {
+        while(getline(file, line))
+        {
+            vector<string> content;
+            stringstream str(line);
+            string word;
+
+            while(getline(str, word, ','))
+                content.push_back(word);
+
+            dcmLabels.push_back(stoi(content[1]));
+
+        }
+    }
+    else
+        cout<<"Could not open the file\n";
+
+    file.close();
+
+    return dcmLabels;
 }
 
 vector<int> DicomUtils::getDicomTargetRoi(const char *path, string dicomFilePath)

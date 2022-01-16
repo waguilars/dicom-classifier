@@ -30,7 +30,7 @@ public:
 
     std::vector<std::vector<double>> getDoubleImageMatrix(int depth);
 
-    void saveData(std::vector<std::vector<int>> data, const char* filename, std::string delimiter, bool header);
+    static void saveData(std::vector<std::vector<int>> data, const char* filename, std::string delimiter, bool header);
 
 
 };

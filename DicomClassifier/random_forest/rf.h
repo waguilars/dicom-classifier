@@ -24,6 +24,9 @@ public:
     void setTrainData(vector<vector<double>> data, vector<int> target);
     void predict(vector<vector<double>> data, vector<int> target, bool showOutput);
     void init(bool showOutput);
+    void setTrainFile(string filename);
+    void setPredictFile(string filename);
+    void setDepVarName(string name);
 
 private:
         // Config
@@ -31,6 +34,7 @@ private:
         MemoryMode mode;
         string  filename;
         string outprefix;
+        string depvarname;
 //        std::ofstream logfile { arg_handler.outprefix + ".log" };
         uint default_seed;
         string predict_file;

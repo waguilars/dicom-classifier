@@ -22,11 +22,12 @@ RF::RF(int trees = DEFAULT_NUM_TREE)
     this->default_seed = 0;
     this->predict_file = ""; // Use to load predict file
     this->split_weights_file = "";
-
+    this->depvarname = "LABEL";
     this->status_var_name = "";
     this->replacement = false;
 
     this->save_memory = false;
+
 
     this->predall = false;
     this->samplefraction = 0;
@@ -36,9 +37,7 @@ RF::RF(int trees = DEFAULT_NUM_TREE)
 }
 
 RF::~RF()
-{
-    remove(this->filename.c_str());
-}
+{}
 
 void RF::setTrainData(vector<vector<double> > data, vector<int> target)
 {
@@ -57,7 +56,7 @@ void RF::predict(vector<vector<double>> data, vector<int> target, bool showOutpu
 void RF::init(bool showOutput)
 {
     if (showOutput) {
-        this->forest->initCpp("LABEL", mode, filename, mtry, outprefix, totalTrees, &std::cout,
+        this->forest->initCpp(depvarname, mode, filename, mtry, outprefix, totalTrees, &std::cout,
                               default_seed, DEFAULT_NUM_THREADS,predict_file, DEFAULT_IMPORTANCE_MODE, DEFAULT_MIN_NODE_SIZE_CLASSIFICATION,
                               split_weights_file, split_vars, status_var_name, replacement, cat_vars, save_memory,
                               DEFAULT_SPLITRULE, weights_file, predall, samplefraction, DEFAULT_ALPHA,
@@ -65,13 +64,28 @@ void RF::init(bool showOutput)
                               DEFAULT_MAXDEPTH, reg_factor, reg_usedepth);
 
     } else {
-        this->forest->initCpp("LABEL", mode, filename, mtry, outprefix, totalTrees, NULL,
+        this->forest->initCpp(depvarname, mode, filename, mtry, outprefix, totalTrees, NULL,
                               default_seed, DEFAULT_NUM_THREADS,predict_file, DEFAULT_IMPORTANCE_MODE, DEFAULT_MIN_NODE_SIZE_CLASSIFICATION,
                               split_weights_file, split_vars, status_var_name, replacement, cat_vars, save_memory,
                               DEFAULT_SPLITRULE, weights_file, predall, samplefraction, DEFAULT_ALPHA,
                               DEFAULT_MINPROP, holdout, DEFAULT_PREDICTIONTYPE, DEFAULT_NUM_RANDOM_SPLITS,
                               DEFAULT_MAXDEPTH, reg_factor, reg_usedepth);
     }
+}
+
+void RF::setTrainFile(string filename)
+{
+    this->filename = filename;
+}
+
+void RF::setPredictFile(string filename)
+{
+    this->predict_file = filename;
+}
+
+void RF::setDepVarName(string name)
+{
+    this->depvarname = name;
 }
 
 string RF::generateDataFormat(vector<vector<double>> data, vector<int> target)

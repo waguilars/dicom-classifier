@@ -13,8 +13,16 @@ class DicomUtils
 {
 public:
     DicomUtils();
-    // Return list with path of dicom files
+    // Return list with path of dicom files from and directory
     static vector<string> getDicomFilesPath(const char *path);
+
+    // return a list of dicom files path based in file list
+    // Format:
+    // filename.dcm, label
+    static vector<string> makeDicomFilesPath(string dicomDirectory, string summaryFile);
+
+    // Return a list with the labels of each dcmfile
+    static vector<int> makeDicomLabels(string filepath);
 
     // Read labels generated based on the roi ([filename].target)
     // path -> directory of target values
@@ -24,6 +32,8 @@ public:
     static int getDataWidth(vector<string> dicomFiles);
     static int getDataHeight(vector<string> dicomFiles);
     static string base_name(string const & path, string const &delims);
+
+
     static double **asFCMPointsData(int **arr, int numPoints, int numDims);
     static void writeMetrics(ofstream &file, int i, string filename, double cpu, int mem, double time, double param);
 
