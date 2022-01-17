@@ -5,7 +5,7 @@ Dicom Classifier es una libreria para manejar imagenes médicas dicom y con dife
 ## Dependencias
 La libreria usa:
 - **libdcmtk-dev**: para el manejo de imágenes dicom.
-- **libeigen3-dev**: operaciones matemáticas que.
+- **libeigen3-dev**: operaciones matemáticas.
 
 Para instalarlos puedes ejecutar el script `checker.sh`
 
@@ -60,7 +60,7 @@ Para usarlo con QT inicialice un nuevo proyecto y asegurece que su archivo de co
 INCLUDEPATH += /dicom-classifier/DicomClassifier \ # Aqui es el path del proyecto con las cabeceras.
     /usr/include/eigen3 #incluimos la dependencia de eigen3
 
-LIBS += -L/dicom-classifier/build   # Directorio con los archivos compilados
+LIBS += -L/dicom-classifier/build \  # Directorio con los archivos compilados
     -lDicomClassifier \
     -ldcmdata \
     -ldcmimgle \
