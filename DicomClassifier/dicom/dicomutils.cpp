@@ -30,6 +30,7 @@ vector<string> DicomUtils::getDicomFilesPath(const char *path) {
     }
     else {
         cout<<"\nError Occurred when reading dir!" << endl;
+        throw std::runtime_error("Error Occurred when reading dir");
         return files;
     }
     return files;
@@ -57,8 +58,11 @@ vector<string> DicomUtils::makeDicomFilesPath(string dicomDirectory, string summ
 
         }
     }
-    else
+    else{
         cout<<"Could not open the file\n";
+        throw std::runtime_error("Error Occurred when reading dir");
+    }
+
 
     file.close();
 
