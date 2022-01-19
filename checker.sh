@@ -4,8 +4,6 @@
 
 PKGS=(
   "libdcmtk-dev"  # to read images with dcmtk
-  "libeigen3-dev" # To make operations with fuzzy-c-means
-  "libarmadillo-dev" # Scientific fast operations
   "build-essential"
   "cmake"
 )

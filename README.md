@@ -5,7 +5,6 @@ Dicom Classifier es una libreria para manejar imagenes médicas dicom y con dife
 ## Dependencias
 La libreria usa:
 - **libdcmtk-dev**: para el manejo de imágenes dicom.
-- **libeigen3-dev**: operaciones matemáticas.
 
 Para instalarlos puedes ejecutar el script `checker.sh`
 
@@ -16,7 +15,7 @@ chmod +x ./checker.sh
 
 Tambien se pueden instalar de manera manual:
 ```bash
-sudo apt install libeigen3-dev libdcmtk-dev
+sudo apt install libdcmtk-dev build-essential cmake
 ```
 
 ## Instalación
@@ -51,14 +50,11 @@ La libreria se ha usado con los IDEs QT Creator y CodeBlocks.
 
 > **Nota:** Algunos algoritmos hacen uso de procesamiento multi-hilo, para ellos asegurese de usar el flag `-pthread` e incluir la libreria `-lpthread`.
 
-> **Nota:** Segurese de incluir la dependencia de eigen3
-
 ### QT
 Para usarlo con QT inicialice un nuevo proyecto y asegurece que su archivo de configuracion `.pro` tenga lo siguiente:
 
 ```
 INCLUDEPATH += /dicom-classifier/DicomClassifier \ # Aqui es el path del proyecto con las cabeceras.
-    /usr/include/eigen3 #incluimos la dependencia de eigen3
 
 LIBS += -L/dicom-classifier/build \  # Directorio con los archivos compilados
     -lDicomClassifier \
@@ -66,7 +62,7 @@ LIBS += -L/dicom-classifier/build \  # Directorio con los archivos compilados
     -ldcmimgle \
     -ldcmimage \
     -ldcmjpeg \
-    -lpthread # Necesario para algunos algoritmos
+    -lpthread
 
 ```
 
