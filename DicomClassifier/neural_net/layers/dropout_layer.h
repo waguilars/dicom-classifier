@@ -14,7 +14,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * applies dropout to the input
@@ -144,4 +144,4 @@ class dropout_layer : public layer {
   std::vector<std::vector<uint8_t>> mask_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

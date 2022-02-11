@@ -10,7 +10,7 @@
 #include "neural_net/core/framework/op_kernel.h"
 #include "neural_net/core/kernels/lstm_cell_op_internal.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class LSTMCellGradOp : public core::OpKernel {
  public:
@@ -76,4 +76,4 @@ class LSTMCellGradOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

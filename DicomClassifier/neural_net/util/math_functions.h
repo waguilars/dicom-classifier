@@ -12,7 +12,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 // x = x / denom
 inline void vector_div(vec_t &x, float_t denom) {
@@ -95,4 +95,4 @@ inline void moments(const tensor_t &in,
                                      mean, variance);
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

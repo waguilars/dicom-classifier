@@ -22,7 +22,7 @@
 #include "neural_net/util/serialization_functions.h"
 #include "neural_net/util/serialization_layer_list.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 template <typename InputArchive>
 class deserialization_helper {
@@ -152,4 +152,4 @@ std::shared_ptr<layer> layer::load_layer(InputArchive &ia) {
   return l;
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

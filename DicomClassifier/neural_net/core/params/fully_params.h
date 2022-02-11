@@ -9,7 +9,7 @@
 
 #include "neural_net/core/params/params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class fully_params : public Params {
@@ -25,4 +25,4 @@ inline fully_params &Params::fully() {
 }
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

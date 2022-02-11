@@ -10,7 +10,7 @@
 #include "neural_net/core/framework/op_kernel.h"
 #include "neural_net/core/kernels/rnn_cell_op_internal.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class RecurrentCellOp : public core::OpKernel {
  public:
@@ -51,4 +51,4 @@ class RecurrentCellOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

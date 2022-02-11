@@ -12,7 +12,7 @@
 #include "neural_net/core/kernels/maxpool_op_avx.h"
 #include "neural_net/core/kernels/maxpool_op_internal.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class MaxPoolGradOp : public core::OpKernel {
  public:
@@ -46,4 +46,4 @@ class MaxPoolGradOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

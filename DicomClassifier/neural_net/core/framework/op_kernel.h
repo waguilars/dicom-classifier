@@ -14,7 +14,7 @@
 #include "neural_net/core/framework/device.fwd.h"
 #include "neural_net/core/params/conv_params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class OpKernel;  // delared below
@@ -142,4 +142,4 @@ class OpKernel {
 };
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

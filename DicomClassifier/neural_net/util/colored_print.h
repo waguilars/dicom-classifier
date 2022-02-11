@@ -18,7 +18,7 @@
 #include <Windows.h>
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 enum class Color { RED, GREEN, BLUE, YELLOW };
 
@@ -75,4 +75,4 @@ inline void coloredPrint(Color c, const std::string &msg) {
   coloredPrint(c, msg.c_str());
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

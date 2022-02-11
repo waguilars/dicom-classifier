@@ -26,7 +26,7 @@
 #include "neural_net/layers/lrn_layer.h"
 #include "neural_net/layers/max_pooling_layer.h"
 
-typedef tiny_dnn::shape3d shape_t;
+typedef neural_net::shape3d shape_t;
 
 #if defined(_MSC_VER) || defined(WIN32)
 #define _NOMINMAX
@@ -45,7 +45,7 @@ typedef tiny_dnn::shape3d shape_t;
 #define CNN_OPEN_TXT(filename) open(filename, O_RDONLY)
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace detail {
 
 inline void read_proto_from_text(const std::string &prototxt,
@@ -1112,7 +1112,7 @@ class caffe_layer_vector {
 };
 
 }  // namespace detail
-}  // namespace tiny_dnn
+}  // namespace neural_net
 
 #ifdef _MSC_VER
 #pragma warning(pop)

@@ -11,7 +11,7 @@
 
 #include "neural_net/core/kernels/rnn_cell_op_internal.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class RecurrentCellGradOp : public core::OpKernel {
  public:
@@ -52,4 +52,4 @@ class RecurrentCellGradOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

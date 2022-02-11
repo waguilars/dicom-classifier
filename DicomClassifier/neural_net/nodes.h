@@ -25,34 +25,34 @@
 namespace cereal {
 
 template <typename Archive>
-void save(Archive &ar, const std::vector<tiny_dnn::layer *> &v) {
+void save(Archive &ar, const std::vector<neural_net::layer *> &v) {
 #ifndef CNN_NO_SERIALIZATION
   ar(cereal::make_size_tag(static_cast<cereal::size_type>(v.size())));
   for (auto n : v) {
-    tiny_dnn::layer::save_layer(ar, *n);
+    neural_net::layer::save_layer(ar, *n);
   }
 #else
-  throw tiny_dnn::nn_error("tiny-dnn was not built with Serialization support");
+  throw neural_net::nn_error("tiny-dnn was not built with Serialization support");
 #endif  // CNN_NO_SERIALIZATION
 }
 
 template <typename Archive>
-void load(Archive &ar, std::vector<std::shared_ptr<tiny_dnn::layer>> &v) {
+void load(Archive &ar, std::vector<std::shared_ptr<neural_net::layer>> &v) {
 #ifndef CNN_NO_SERIALIZATION
   cereal::size_type size;
   ar(cereal::make_size_tag(size));
 
   for (size_t i = 0; i < size; i++) {
-    v.emplace_back(tiny_dnn::layer::load_layer(ar));
+    v.emplace_back(neural_net::layer::load_layer(ar));
   }
 #else
-  throw tiny_dnn::nn_error("tiny-dnn was not built with Serialization support");
+  throw neural_net::nn_error("tiny-dnn was not built with Serialization support");
 #endif  // CNN_NO_SERIALIZATION
 }
 
 }  // namespace cereal
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /** basic class of various network types (sequential, multi-in/multi-out).
  *
@@ -617,4 +617,4 @@ void nodes::load_model(InputArchive &ia) {
 #endif  // CNN_NO_SERIALIZATION
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

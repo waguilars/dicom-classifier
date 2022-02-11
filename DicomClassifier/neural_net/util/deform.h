@@ -9,7 +9,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 inline vec_t corrupt(vec_t &&in, float_t corruption_level, float_t min_value) {
   for (size_t i                            = 0; i < in.size(); i++)
@@ -17,4 +17,4 @@ inline vec_t corrupt(vec_t &&in, float_t corruption_level, float_t min_value) {
   return in;
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

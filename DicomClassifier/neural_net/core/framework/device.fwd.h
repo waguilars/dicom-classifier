@@ -17,7 +17,7 @@
 #endif
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 enum class device_t { NONE, CPU, GPU /*, FPGA */ };
 
@@ -111,4 +111,4 @@ class Device {
 #endif
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

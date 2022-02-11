@@ -15,7 +15,7 @@
 #include "neural_net/core/kernels/fully_connected_op_internal.h"
 #include "neural_net/core/kernels/fully_connected_op_nnpack.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class FullyConnectedOp : public core::OpKernel {
  public:
@@ -64,4 +64,4 @@ class FullyConnectedOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

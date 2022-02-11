@@ -12,7 +12,7 @@
 #include "neural_net/activations/tanh_layer.h"
 #include "neural_net/core/params/params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class lstm_cell_params : public Params {
@@ -29,4 +29,4 @@ inline lstm_cell_params &Params::lstm_cell() {
 }
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -22,7 +22,7 @@
 #include "neural_net/util/image.h"
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * applies max-pooling operaton to the spatial data
@@ -268,4 +268,4 @@ class max_pooling_layer : public layer {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

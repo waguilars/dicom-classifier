@@ -11,7 +11,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 // mean-squared-error loss function for regression
 class mse {
@@ -217,4 +217,4 @@ std::vector<tensor_t> gradient(const std::vector<tensor_t> &y,
   return gradients;
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

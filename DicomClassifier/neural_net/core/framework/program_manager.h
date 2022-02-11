@@ -22,7 +22,7 @@
 #endif
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /* The class models a general manager to handle compiled OpenCL programs.
  * Since we need to retain compiled programs per layer type, it's
@@ -156,4 +156,4 @@ class ProgramManager {
 #endif
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

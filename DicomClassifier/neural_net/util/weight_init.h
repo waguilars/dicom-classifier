@@ -9,7 +9,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace weight_init {
 
 class function {
@@ -108,4 +108,4 @@ class he : public scalable {
 };
 
 }  // namespace weight_init
-}  // namespace tiny_dnn
+}  // namespace neural_net

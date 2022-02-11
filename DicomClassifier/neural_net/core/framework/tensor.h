@@ -21,7 +21,7 @@
 #endif
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * A tensor of the given dimension.
@@ -272,4 +272,4 @@ auto host_data() {
   Storage storage_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

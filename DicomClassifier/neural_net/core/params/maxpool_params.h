@@ -11,7 +11,7 @@
 
 #include "neural_net/core/params/params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class maxpool_params : public Params {
@@ -44,4 +44,4 @@ inline maxpool_params &Params::maxpool() {
 }
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

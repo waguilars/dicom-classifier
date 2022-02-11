@@ -16,7 +16,7 @@
 #include "neural_net/util/math_functions.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * L2 Normalization
@@ -130,4 +130,4 @@ class l2_normalization_layer : public layer {
   float_t scale_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

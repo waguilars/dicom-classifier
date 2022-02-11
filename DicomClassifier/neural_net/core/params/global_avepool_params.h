@@ -8,7 +8,7 @@
 #pragma once
 #include "neural_net/core/params/params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class global_avepool_params : public Params {
@@ -22,4 +22,4 @@ inline global_avepool_params &Params::global_avepool() {
 }
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

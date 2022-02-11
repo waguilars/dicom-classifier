@@ -9,7 +9,7 @@
 
 #include "neural_net/core/params/deconv_params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 namespace kernels {
 
@@ -102,4 +102,4 @@ inline void tiny_deconv2d_back_kernel(const deconv_params &params,
 
 }  // namespace kernels
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

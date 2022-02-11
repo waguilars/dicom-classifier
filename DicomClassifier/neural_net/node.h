@@ -26,7 +26,7 @@
 #include "neural_net/util/image.h"
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class node;
 class layer;
@@ -258,4 +258,4 @@ inline const layer_tuple<layer *> &operator<<(T &lhs,
   }
   return rhs;
 }
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -13,7 +13,7 @@
 #include "neural_net/core/kernels/maxpool_op_internal.h"
 #include "neural_net/core/kernels/maxpool_op_nnpack.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class MaxPoolOp : public core::OpKernel {
  public:
@@ -61,4 +61,4 @@ class MaxPoolOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -21,7 +21,7 @@
 #include "neural_net/core/kernels/tiny_quantized_fully_connected_kernel.h"
 #endif  // CNN_USE_GEMMLOWP
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class tiny_backend : public backend {
@@ -396,4 +396,4 @@ class tiny_backend : public backend {
 };
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

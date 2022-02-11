@@ -14,7 +14,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * element-wise add N vectors ```y_i = x0_i + x1_i + ... + xnum_i```
@@ -75,4 +75,4 @@ class elementwise_add_layer : public layer {
   size_t dim_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

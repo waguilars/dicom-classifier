@@ -10,7 +10,7 @@
 #include "neural_net/layers/lstm_cell.h"
 #include "neural_net/layers/rnn_cell.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 // Wrappers for the cell constructors should be placed here.
 
 // rnn cell:
@@ -36,4 +36,4 @@ inline std::shared_ptr<cell> lstm(
   const lstm_cell_parameters params = lstm_cell_parameters()) {
   return std::make_shared<lstm_cell>(lstm_cell(in_dim, out_dim, params));
 }
-}  // namespace tiny_dnn
+}  // namespace neural_net

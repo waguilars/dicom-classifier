@@ -15,7 +15,7 @@ extern "C" {
 }
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace kernels {
 
 inline void fully_connected_op_intel_mkl(const tensor_t &in_data,
@@ -54,4 +54,4 @@ inline void fully_connected_op_intel_mkl(const tensor_t &in_data,
 }
 
 }  // namespace kernels
-}  // namespace tiny_dnn
+}  // namespace neural_net

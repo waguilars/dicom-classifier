@@ -20,7 +20,7 @@
 #endif
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /* The class models a program to be stored in the register.
  * Each instance of this class will be used as key in the register.
@@ -70,4 +70,4 @@ class ProgramHash {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

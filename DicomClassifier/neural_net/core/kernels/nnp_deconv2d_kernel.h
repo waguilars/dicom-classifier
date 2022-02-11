@@ -14,7 +14,7 @@
 #ifdef CNN_USE_NNPACK
 #include <nnpack.h>
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 namespace kernels {
 
@@ -26,6 +26,6 @@ inline void nnp_deconv2d_kernel(const conv_params &params,
 
 }  // namespace kernels
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net
 
 #endif

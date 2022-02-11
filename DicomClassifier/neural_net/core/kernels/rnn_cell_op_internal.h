@@ -9,7 +9,7 @@
 
 #include "neural_net/core/params/rnn_cell_params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace kernels {
 
 inline void rnn_cell_op_internal(const tensor_t &in_data,
@@ -159,4 +159,4 @@ inline void rnn_cell_op_internal(const tensor_t &prev_out,
 }
 
 }  // namespace kernels
-}  // namespace tiny_dnn
+}  // namespace neural_net

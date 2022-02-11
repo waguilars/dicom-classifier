@@ -34,7 +34,7 @@
 #include "neural_net/util/image.h"
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * base class of all kind of NN layers
@@ -755,7 +755,7 @@ class layer : public node {
 
   template <typename T, typename Func>
   inline void for_i(T size, Func f, size_t grainsize = 100) {
-    tiny_dnn::for_i(parallelize_, size, f, grainsize);
+    neural_net::for_i(parallelize_, size, f, grainsize);
   }
 
   friend struct serialization_buddy;
@@ -998,4 +998,4 @@ void graph_traverse(layer *root_node, T &&node_callback, U &&edge_callback) {
   }
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

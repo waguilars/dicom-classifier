@@ -52,7 +52,7 @@
 #endif
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 ///< output label(class-index) for classification
 ///< must be equal to size_t, because size of last layer is equal to num.
@@ -284,11 +284,11 @@ enum class vector_type : int32_t {
 
 inline std::string to_string(vector_type vtype) {
   switch (vtype) {
-    case tiny_dnn::vector_type::data: return "data";
-    case tiny_dnn::vector_type::weight: return "weight";
-    case tiny_dnn::vector_type::bias: return "bias";
-    case tiny_dnn::vector_type::label: return "label";
-    case tiny_dnn::vector_type::aux: return "aux";
+    case neural_net::vector_type::data: return "data";
+    case neural_net::vector_type::weight: return "weight";
+    case neural_net::vector_type::bias: return "bias";
+    case neural_net::vector_type::label: return "label";
+    case neural_net::vector_type::aux: return "aux";
     default: return "unknown";
   }
 }
@@ -460,4 +460,4 @@ struct are_all<checker, T0, Ts...>
 
 template <typename... Ts>
 using are_all_xexpr = are_all<is_xexpression, Ts...>;
-}  // namespace tiny_dnn
+}  // namespace neural_net

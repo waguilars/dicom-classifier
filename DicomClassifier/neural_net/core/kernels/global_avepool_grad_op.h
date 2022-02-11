@@ -11,7 +11,7 @@
 #include "neural_net/core/kernels/global_avepool_op_avx.h"
 #include "neural_net/core/kernels/global_avepool_op_internal.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class GlobalAvePoolGradOp : public core::OpKernel {
  public:
@@ -42,4 +42,4 @@ class GlobalAvePoolGradOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

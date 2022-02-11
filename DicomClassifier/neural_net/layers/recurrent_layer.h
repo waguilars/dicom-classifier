@@ -13,7 +13,7 @@
 #include "neural_net/layers/cell.h"
 #include "neural_net/layers/layer.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /*
  * optional parameters for the recurrent layer
@@ -445,4 +445,4 @@ class recurrent_layer : public layer {
   std::vector<bool> delete_mask_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

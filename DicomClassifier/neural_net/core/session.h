@@ -13,7 +13,7 @@
 
 #include "neural_net/core/device.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class session {
@@ -36,4 +36,4 @@ class session {
 };
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

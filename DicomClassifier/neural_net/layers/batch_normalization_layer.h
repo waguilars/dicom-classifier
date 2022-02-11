@@ -16,7 +16,7 @@
 #include "neural_net/util/math_functions.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * Batch Normalization
@@ -255,4 +255,4 @@ class batch_normalization_layer : public layer {
   bool update_immidiately_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

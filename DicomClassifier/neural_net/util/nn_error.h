@@ -11,7 +11,7 @@
 #include <string>
 #include "neural_net/util/colored_print.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * error exception class for tiny-dnn
@@ -63,4 +63,4 @@ class nn_not_implemented_error : public nn_error {
     : nn_error(msg) {}
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

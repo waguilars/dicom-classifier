@@ -36,7 +36,7 @@
 #include <dispatch/dispatch.h>
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 #ifdef CNN_USE_TBB
 
@@ -210,4 +210,4 @@ inline void for_i(T size, Func f, size_t grainsize = 100) {
   for_i(true, size, f, grainsize);
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

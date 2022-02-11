@@ -15,7 +15,7 @@
 #include "neural_net/network.h"
 #include "neural_net/node.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * utility for graph visualization
@@ -116,4 +116,4 @@ class graph_visualizer {
   std::string name_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

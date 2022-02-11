@@ -12,7 +12,7 @@
 
 #include "neural_net/core/framework/op_kernel.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class Conv2dOpenCLForwardOp : public core::OpKernel {
  public:
@@ -45,7 +45,7 @@ class Conv2dOpenCLForwardOp : public core::OpKernel {
     auto kernel = CLCudaAPI::Kernel(program, "CFMulti");
     nn_warn("Got Kernel");
 
-    tiny_dnn::Device *device = context.device();
+    neural_net::Device *device = context.device();
     CLCudaAPI::Context ctx   = context.device()->context();
     CLCudaAPI::Queue queue   = context.device()->queue();
 
@@ -137,4 +137,4 @@ class Conv2dOpenCLBackwardOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

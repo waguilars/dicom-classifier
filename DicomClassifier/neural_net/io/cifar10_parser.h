@@ -21,7 +21,7 @@
 #define CIFAR10_IMAGE_AREA (CIFAR10_IMAGE_WIDTH * CIFAR10_IMAGE_HEIGHT)
 #define CIFAR10_IMAGE_SIZE (CIFAR10_IMAGE_AREA * CIFAR10_IMAGE_DEPTH)
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * parse CIFAR-10 database format images
@@ -86,4 +86,4 @@ inline void parse_cifar10(const std::string &filename,
   }
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

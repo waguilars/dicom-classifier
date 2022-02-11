@@ -22,7 +22,7 @@
 #include "neural_net/util/serialization_functions.h"
 #include "neural_net/util/serialization_layer_list.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 template <typename OutputArchive>
 class serialization_helper {
@@ -122,4 +122,4 @@ void layer::serialize_prolog(Archive &ar) {
   ar(cereal::make_nvp("type", name));
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

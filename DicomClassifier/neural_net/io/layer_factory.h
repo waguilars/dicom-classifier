@@ -12,7 +12,7 @@
 #include "neural_net/layers/fully_connected_layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * create multi-layer perceptron
@@ -36,4 +36,4 @@ network<sequential> make_mlp(const std::vector<size_t> &units) {
   return make_mlp<activation>(units.begin(), units.end());
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

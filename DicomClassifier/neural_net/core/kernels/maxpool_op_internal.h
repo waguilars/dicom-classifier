@@ -10,7 +10,7 @@
 #include <limits>
 #include <vector>
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace kernels {
 
 inline void maxpool_op_internal(const tensor_t &in_data,
@@ -57,4 +57,4 @@ inline void maxpool_grad_op_internal(tensor_t &prev_delta,
 }
 
 }  // namespace kernels
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -14,7 +14,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace detail {
 
 struct mnist_header {
@@ -156,4 +156,4 @@ inline void parse_mnist_images(const std::string &image_file,
   }
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

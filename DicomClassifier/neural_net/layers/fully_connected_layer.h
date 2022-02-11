@@ -17,7 +17,7 @@
 #include "neural_net/core/kernels/fully_connected_grad_op.h"
 #include "neural_net/core/kernels/fully_connected_op.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * compute fully-connected(matmul) operation
@@ -133,4 +133,4 @@ class fully_connected_layer : public layer {
   std::shared_ptr<core::OpKernel> kernel_back_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

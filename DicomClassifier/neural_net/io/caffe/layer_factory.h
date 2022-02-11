@@ -22,7 +22,7 @@
 #include "neural_net/optimizers/optimizer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * create whole network and load weights from caffe's netparameter
@@ -176,4 +176,4 @@ inline void reload_weight_from_caffe_protobinary(const std::string &caffebinary,
   reload_weight_from_caffe_net(np, net);
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -15,7 +15,7 @@
 #include "neural_net/core/kernels/tiny_quantized_matmul_kernel.h"
 #include "neural_net/core/params/fully_params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 namespace kernels {
 
@@ -371,6 +371,6 @@ inline void tiny_quantized_fully_connected_kernel(
 
 }  // namespace kernels
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net
 
 #endif  // CNN_USE_GEMMLOWP

@@ -21,7 +21,7 @@
 #include <nnpack.h>
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 // TODO(edgar): remove this
@@ -171,4 +171,4 @@ class backend {
 };
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

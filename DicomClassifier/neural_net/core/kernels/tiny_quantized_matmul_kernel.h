@@ -26,7 +26,7 @@ limitations under the License.
 #include "third_party/gemmlowp/public/gemmlowp.h"
 #include "neural_net/core/kernels/tiny_quantization_kernel.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 namespace kernels {
 
@@ -134,4 +134,4 @@ void tiny_quantized_matmul(const std::vector<T1> &a,
 
 }  // namespace kernels
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

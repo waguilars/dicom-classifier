@@ -36,7 +36,7 @@
 #define STB_IMAGE_WRITE_INLINE
 #include "neural_net/third_party/stb/stb_image_write.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 namespace detail {
 
@@ -457,7 +457,7 @@ inline image<T> vec2image(const vec_t &vec, const index3d<size_t> &maps) {
   return img;
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net
 
 #ifdef _MSC_VER
 #pragma warning(pop)

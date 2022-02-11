@@ -10,7 +10,7 @@
 #include "neural_net/core/backend.h"
 #include "neural_net/core/framework/device.fwd.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * Abstract class for recurrent cells.
@@ -42,4 +42,4 @@ class cell : public layer {
                           // backend, etc from the wrapper
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

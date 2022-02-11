@@ -14,7 +14,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class activation_layer : public layer {
  public:
@@ -124,4 +124,4 @@ class activation_layer : public layer {
   shape3d in_shape_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

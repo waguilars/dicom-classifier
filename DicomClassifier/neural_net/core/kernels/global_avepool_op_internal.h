@@ -7,7 +7,7 @@
 */
 #pragma once
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace kernels {
 
 inline void global_avepool_op_internal(
@@ -49,4 +49,4 @@ inline void global_avepool_grad_op_internal(
 }
 
 }  // namespace kernels
-}  // namespace tiny_dnn
+}  // namespace neural_net

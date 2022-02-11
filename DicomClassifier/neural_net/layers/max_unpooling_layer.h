@@ -17,7 +17,7 @@
 #include "neural_net/util/image.h"
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * applies max-pooing operaton to the spatial data
@@ -180,4 +180,4 @@ class max_unpooling_layer : public layer {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

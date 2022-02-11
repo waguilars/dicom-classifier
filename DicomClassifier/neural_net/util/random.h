@@ -14,7 +14,7 @@
 #include "neural_net/config.h"
 #include "neural_net/util/nn_error.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class random_generator {
  public:
@@ -78,4 +78,4 @@ void gaussian_rand(Iter begin, Iter end, float_t mean, float_t sigma) {
   for (Iter it = begin; it != end; ++it) *it = gaussian_rand(mean, sigma);
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

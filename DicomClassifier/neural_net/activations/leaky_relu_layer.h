@@ -13,7 +13,7 @@
 #include "neural_net/activations/activation_layer.h"
 #include "neural_net/layers/layer.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class leaky_relu_layer : public activation_layer {
  public:
@@ -96,4 +96,4 @@ class leaky_relu_layer : public activation_layer {
   friend struct serialization_buddy;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -12,7 +12,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 // calculate the number of samples for each class label
 //  - for example, if there are 10 samples having label 0, and
@@ -79,4 +79,4 @@ inline std::vector<vec_t> create_balanced_target_cost(
   return target_cost;
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

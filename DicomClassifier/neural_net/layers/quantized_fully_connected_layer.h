@@ -15,7 +15,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/product.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * compute fully-connected(matmul) operation
@@ -112,4 +112,4 @@ class quantized_fully_connected_layer : public layer {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

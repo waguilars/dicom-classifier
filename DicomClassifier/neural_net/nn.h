@@ -78,100 +78,100 @@
 #include "neural_net/util/deserialization_helper.h"
 #include "neural_net/util/serialization_helper.h"
 // to allow upcasting
-CEREAL_REGISTER_TYPE(tiny_dnn::elu_layer)
-CEREAL_REGISTER_TYPE(tiny_dnn::leaky_relu_layer)
-CEREAL_REGISTER_TYPE(tiny_dnn::relu_layer)
-CEREAL_REGISTER_TYPE(tiny_dnn::sigmoid_layer)
-CEREAL_REGISTER_TYPE(tiny_dnn::softmax_layer)
-CEREAL_REGISTER_TYPE(tiny_dnn::softplus_layer)
-CEREAL_REGISTER_TYPE(tiny_dnn::softsign_layer)
-CEREAL_REGISTER_TYPE(tiny_dnn::tanh_layer)
-CEREAL_REGISTER_TYPE(tiny_dnn::tanh_p1m2_layer)
+CEREAL_REGISTER_TYPE(neural_net::elu_layer)
+CEREAL_REGISTER_TYPE(neural_net::leaky_relu_layer)
+CEREAL_REGISTER_TYPE(neural_net::relu_layer)
+CEREAL_REGISTER_TYPE(neural_net::sigmoid_layer)
+CEREAL_REGISTER_TYPE(neural_net::softmax_layer)
+CEREAL_REGISTER_TYPE(neural_net::softplus_layer)
+CEREAL_REGISTER_TYPE(neural_net::softsign_layer)
+CEREAL_REGISTER_TYPE(neural_net::tanh_layer)
+CEREAL_REGISTER_TYPE(neural_net::tanh_p1m2_layer)
 #endif  // CNN_NO_SERIALIZATION
 
 // shortcut version of layer names
-namespace tiny_dnn {
+namespace neural_net {
 namespace layers {
 
-using conv = tiny_dnn::convolutional_layer;
+using conv = neural_net::convolutional_layer;
 
-using q_conv = tiny_dnn::quantized_convolutional_layer;
+using q_conv = neural_net::quantized_convolutional_layer;
 
-using max_pool = tiny_dnn::max_pooling_layer;
+using max_pool = neural_net::max_pooling_layer;
 
-using ave_pool = tiny_dnn::average_pooling_layer;
+using ave_pool = neural_net::average_pooling_layer;
 
-using fc = tiny_dnn::fully_connected_layer;
+using fc = neural_net::fully_connected_layer;
 
-using dense = tiny_dnn::fully_connected_layer;
+using dense = neural_net::fully_connected_layer;
 
-using zero_pad = tiny_dnn::zero_pad_layer;
+using zero_pad = neural_net::zero_pad_layer;
 
-// using rnn_cell = tiny_dnn::rnn_cell_layer;
+// using rnn_cell = neural_net::rnn_cell_layer;
 
 #ifdef CNN_USE_GEMMLOWP
-using q_fc = tiny_dnn::quantized_fully_connected_layer;
+using q_fc = neural_net::quantized_fully_connected_layer;
 #endif
 
-using add = tiny_dnn::elementwise_add_layer;
+using add = neural_net::elementwise_add_layer;
 
-using dropout = tiny_dnn::dropout_layer;
+using dropout = neural_net::dropout_layer;
 
-using input = tiny_dnn::input_layer;
+using input = neural_net::input_layer;
 
 using linear = linear_layer;
 
-using lrn = tiny_dnn::lrn_layer;
+using lrn = neural_net::lrn_layer;
 
-using concat = tiny_dnn::concat_layer;
+using concat = neural_net::concat_layer;
 
-using deconv = tiny_dnn::deconvolutional_layer;
+using deconv = neural_net::deconvolutional_layer;
 
-using max_unpool = tiny_dnn::max_unpooling_layer;
+using max_unpool = neural_net::max_unpooling_layer;
 
-using ave_unpool = tiny_dnn::average_unpooling_layer;
+using ave_unpool = neural_net::average_unpooling_layer;
 
 }  // namespace layers
 
 namespace activation {
 
-using sigmoid = tiny_dnn::sigmoid_layer;
+using sigmoid = neural_net::sigmoid_layer;
 
-using asinh = tiny_dnn::asinh_layer;
+using asinh = neural_net::asinh_layer;
 
-using tanh = tiny_dnn::tanh_layer;
+using tanh = neural_net::tanh_layer;
 
-using relu = tiny_dnn::relu_layer;
+using relu = neural_net::relu_layer;
 
-using rectified_linear = tiny_dnn::relu_layer;
+using rectified_linear = neural_net::relu_layer;
 
-using softmax = tiny_dnn::softmax_layer;
+using softmax = neural_net::softmax_layer;
 
-using leaky_relu = tiny_dnn::leaky_relu_layer;
+using leaky_relu = neural_net::leaky_relu_layer;
 
-using elu = tiny_dnn::elu_layer;
+using elu = neural_net::elu_layer;
 
-using selu = tiny_dnn::selu_layer;
+using selu = neural_net::selu_layer;
 
-using tanh_p1m2 = tiny_dnn::tanh_p1m2_layer;
+using tanh_p1m2 = neural_net::tanh_p1m2_layer;
 
-using softplus = tiny_dnn::softplus_layer;
+using softplus = neural_net::softplus_layer;
 
-using softsign = tiny_dnn::softsign_layer;
+using softsign = neural_net::softsign_layer;
 
 }  // namespace activation
 
 #include "neural_net/models/alexnet.h"
 
-using batch_norm = tiny_dnn::batch_normalization_layer;
+using batch_norm = neural_net::batch_normalization_layer;
 
-using l2_norm = tiny_dnn::l2_normalization_layer;
+using l2_norm = neural_net::l2_normalization_layer;
 
-using slice = tiny_dnn::slice_layer;
+using slice = neural_net::slice_layer;
 
-using power = tiny_dnn::power_layer;
+using power = neural_net::power_layer;
 
-}  // namespace tiny_dnn
+}  // namespace neural_net
 
 #ifdef CNN_USE_CAFFE_CONVERTER
 // experimental / require google protobuf

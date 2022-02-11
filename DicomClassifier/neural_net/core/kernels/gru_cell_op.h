@@ -10,7 +10,7 @@
 #include "neural_net/core/framework/op_kernel.h"
 #include "neural_net/core/kernels/gru_cell_op_internal.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class GRUCellOp : public core::OpKernel {
  public:
@@ -68,4 +68,4 @@ class GRUCellOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

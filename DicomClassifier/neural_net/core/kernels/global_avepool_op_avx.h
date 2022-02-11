@@ -7,7 +7,7 @@
 */
 #pragma once
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace kernels {
 
 #ifdef CNN_USE_AVX
@@ -152,4 +152,4 @@ inline void global_avepool_grad_op_avx(
 #endif  // CNN_USE_AVX
 
 }  // namespace kernels
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -21,7 +21,7 @@
 
 #include "neural_net/util/nn_error.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 template <typename T, std::size_t alignment>
 class aligned_allocator {
@@ -125,4 +125,4 @@ inline bool operator!=(const aligned_allocator<T1, alignment> &,
   return false;
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

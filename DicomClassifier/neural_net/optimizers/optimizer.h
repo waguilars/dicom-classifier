@@ -12,7 +12,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * base class of optimizer
@@ -177,7 +177,7 @@ struct adamax : public stateful_optimizer<2> {
 /**
  * SGD without momentum
  *
- * slightly faster than tiny_dnn::momentum
+ * slightly faster than neural_net::momentum
  **/
 struct gradient_descent : public optimizer {
   gradient_descent() : alpha(float_t(0.01)), lambda(float_t(0)) {}
@@ -244,4 +244,4 @@ struct nesterov_momentum : public stateful_optimizer<1> {
   float_t mu;      // momentum
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

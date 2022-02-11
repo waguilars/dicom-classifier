@@ -15,7 +15,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * element-wise pow: ```y = scale*x^factor```
@@ -107,4 +107,4 @@ class power_layer : public layer {
   float_t scale_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -13,7 +13,7 @@
 #include "neural_net/core/kernels/rnn_cell_op.h"
 #include "neural_net/layers/cell.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /*
  * rnn_cell configurable optional parameters
@@ -174,4 +174,4 @@ class rnn_cell : public cell {
   std::shared_ptr<core::OpKernel> kernel_back_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

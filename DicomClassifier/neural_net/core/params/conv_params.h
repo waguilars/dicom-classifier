@@ -13,7 +13,7 @@
 
 #include "neural_net/core/params/params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 struct conv_layer_worker_specific_storage {
@@ -170,4 +170,4 @@ class Conv2dPadding {
 };
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

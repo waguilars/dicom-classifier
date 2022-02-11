@@ -27,7 +27,7 @@
 #include "neural_net/nodes.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 enum class content_type {
   weights,           ///< save/load the weights
@@ -121,8 +121,8 @@ void construct_graph(network<graph> &graph,
  *class.
  * These two classes have same API, except for its construction.
  *
- *     using namespace tiny_dnn;
- *     using namespace tiny_dnn::layers;
+ *     using namespace neural_net;
+ *     using namespace neural_net::layers;
  *
  *     std::vector<vec_t> data;
  *     std::vector<label_t> label;
@@ -760,13 +760,13 @@ class network {
 
   ///< @deprecated use save(filename,target,format) instead.
   void save(std::ostream &os) const {
-    os.precision(std::numeric_limits<tiny_dnn::float_t>::digits10);
+    os.precision(std::numeric_limits<neural_net::float_t>::digits10);
     net_.save(os);
   }
 
   ///< @deprecated use load(filename,target,format) instead.
   void load(std::istream &is) {
-    is.precision(std::numeric_limits<tiny_dnn::float_t>::digits10);
+    is.precision(std::numeric_limits<neural_net::float_t>::digits10);
     net_.load(is);
   }
 
@@ -1186,4 +1186,4 @@ inline void construct_graph(
   graph.net_.construct(in_ptr, out_ptr);
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

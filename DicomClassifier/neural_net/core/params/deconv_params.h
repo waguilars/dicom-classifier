@@ -7,7 +7,7 @@
 */
 #pragma once
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 struct deconv_layer_worker_specific_storage {
@@ -30,4 +30,4 @@ struct deconv_params {
 };
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

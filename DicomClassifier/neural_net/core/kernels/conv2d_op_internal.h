@@ -7,7 +7,7 @@
 */
 #pragma once
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace kernels {
 
 inline void conv2d_op_internal(const tensor_t &in_data,
@@ -181,4 +181,4 @@ void conv2d_op_internal(const tensor_t &prev_out,
 }
 
 }  // namespace kernels
-}  // namespace tiny_dnn
+}  // namespace neural_net

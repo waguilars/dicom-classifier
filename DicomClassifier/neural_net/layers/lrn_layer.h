@@ -13,7 +13,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 enum class norm_region { across_channels, within_channels };
 
@@ -164,4 +164,4 @@ class lrn_layer : public layer {
   vec_t in_square_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

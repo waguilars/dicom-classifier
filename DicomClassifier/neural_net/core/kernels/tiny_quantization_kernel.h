@@ -11,7 +11,7 @@
 #include <limits>
 #include <vector>
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 namespace kernels {
 
@@ -255,4 +255,4 @@ void quantize_down_and_shrink_range(std::vector<T1> &input,
 
 }  // namespace kernels
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

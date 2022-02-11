@@ -12,7 +12,7 @@
 
 #include "neural_net/layers/layer.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class input_layer : public layer {
  public:
@@ -49,4 +49,4 @@ class input_layer : public layer {
   shape3d shape_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

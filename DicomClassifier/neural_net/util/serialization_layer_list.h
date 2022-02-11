@@ -9,7 +9,7 @@
 
 #include "neural_net/layers/layers.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 template <typename T>
 void register_layers(T* h) {
@@ -55,4 +55,4 @@ void register_layers(T* h) {
   h->template register_layer<selu_layer>("selu");
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

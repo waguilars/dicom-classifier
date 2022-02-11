@@ -7,7 +7,7 @@
 */
 #pragma once
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class conv_params;
@@ -33,4 +33,4 @@ class Params {
 };
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

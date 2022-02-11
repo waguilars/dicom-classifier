@@ -17,7 +17,7 @@
 
 #include "neural_net/core/framework/tensor.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  *
@@ -272,4 +272,4 @@ void layer_exp(Tensor<TD, TDS> &dst, const Tensor<TS, TSS> &src1) {
   return unary_tensor_elementwise_operation(dst, src1, details::exp<TS>);
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

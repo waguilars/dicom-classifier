@@ -19,7 +19,7 @@
 #include "neural_net/core/kernels/global_avepool_grad_op.h"
 #include "neural_net/core/kernels/global_avepool_op.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * applies channel-wise global average pooling to spatial data.
@@ -136,4 +136,4 @@ class global_average_pooling_layer : public layer {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

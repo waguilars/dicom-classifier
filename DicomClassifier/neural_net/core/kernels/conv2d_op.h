@@ -13,7 +13,7 @@
 #include "neural_net/core/kernels/conv2d_op_internal.h"
 #include "neural_net/core/kernels/conv2d_op_nnpack.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class Conv2dOp : public core::OpKernel {
  public:
@@ -51,4 +51,4 @@ class Conv2dOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

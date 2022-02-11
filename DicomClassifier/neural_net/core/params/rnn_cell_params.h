@@ -12,7 +12,7 @@
 #include "neural_net/activations/activation_layer.h"
 #include "neural_net/core/params/params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class rnn_cell_params : public Params {
@@ -28,4 +28,4 @@ inline rnn_cell_params &Params::rnn_cell() {
 }
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

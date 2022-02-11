@@ -18,7 +18,7 @@
 #include "neural_net/util/image.h"
 #endif  // DNN_USE_IMAGE_API
 
-namespace tiny_dnn {
+namespace neural_net {
 
 // forward_propagation
 inline void tiny_average_unpooling_kernel(
@@ -233,4 +233,4 @@ class average_unpooling_layer : public partial_connected_layer {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

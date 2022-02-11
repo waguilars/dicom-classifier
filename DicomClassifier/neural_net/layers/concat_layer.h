@@ -14,7 +14,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * concat N layers along depth
@@ -108,4 +108,4 @@ class concat_layer : public layer {
   shape3d out_shape_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

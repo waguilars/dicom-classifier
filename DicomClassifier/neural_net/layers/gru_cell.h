@@ -14,7 +14,7 @@
 #include "neural_net/core/kernels/gru_cell_op.h"
 #include "neural_net/layers/cell.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /*
  *  Optional gru cell parameters
@@ -186,4 +186,4 @@ class gru_cell : public cell {
   std::shared_ptr<core::OpKernel> kernel_back_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -14,7 +14,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 enum class slice_type { slice_samples, slice_channels };
 
@@ -220,4 +220,4 @@ class slice_layer : public layer {
   std::vector<size_t> slice_size_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

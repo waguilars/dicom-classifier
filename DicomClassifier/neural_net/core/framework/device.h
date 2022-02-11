@@ -10,7 +10,7 @@
 #include "neural_net/core/framework/device.fwd.h"
 #include "neural_net/core/framework/program_manager.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 inline Device::Device(device_t type) : type_(type), has_clcuda_api_(false) {
   nn_info("Initializing Non-OpenCL device ...");
@@ -90,4 +90,4 @@ inline void Device::registerOp(layer &l) {
   ProgramManager::getInstance().registerOp(*this, l);
 }
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -15,7 +15,7 @@
 #include "neural_net/core/kernels/avx_kernel_common.h"
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace kernels {
 
 #ifdef CNN_USE_AVX
@@ -898,4 +898,4 @@ inline void conv2d_grad_op_avx(const tensor_t &prev_out,
 }
 
 }  // namespace kernels
-}  // namespace tiny_dnn
+}  // namespace neural_net

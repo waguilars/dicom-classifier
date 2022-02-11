@@ -13,7 +13,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class partial_connected_layer : public layer {
  public:
@@ -146,4 +146,4 @@ class partial_connected_layer : public layer {
   float_t scale_factor_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

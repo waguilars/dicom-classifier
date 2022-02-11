@@ -10,7 +10,7 @@
 #include "neural_net/core/backend.h"
 #include "neural_net/core/params/maxpool_params.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace kernels {
 
 inline void maxpool_op_nnpack(const tensor_t &in_data,
@@ -58,4 +58,4 @@ inline void maxpool_op_nnpack(const tensor_t &in_data,
 }
 
 }  // namespace kernels
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -24,7 +24,7 @@
 #include "neural_net/util/image.h"
 #endif  // DNN_USE_IMAGE_API
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * 2D convolution layer
@@ -558,4 +558,4 @@ class convolutional_layer : public layer {
   } cws_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

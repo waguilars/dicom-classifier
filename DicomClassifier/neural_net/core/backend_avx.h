@@ -13,7 +13,7 @@
 #include "neural_net/core/kernels/avx_deconv2d_back_kernel.h"
 #include "neural_net/core/kernels/avx_deconv2d_kernel.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 namespace core {
 
 class avx_backend : public backend {
@@ -258,4 +258,4 @@ class avx_backend : public backend {
 };
 
 }  // namespace core
-}  // namespace tiny_dnn
+}  // namespace neural_net

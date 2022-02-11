@@ -12,7 +12,7 @@
 #include "neural_net/core/kernels/fully_connected_op_avx.h"
 #include "neural_net/core/kernels/fully_connected_op_internal.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class FullyConnectedGradOp : public core::OpKernel {
  public:
@@ -52,4 +52,4 @@ class FullyConnectedGradOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

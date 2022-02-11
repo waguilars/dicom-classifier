@@ -24,7 +24,7 @@
 #include "neural_net/util/image.h"
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * 2D convolution layer
@@ -494,4 +494,4 @@ class quantized_convolutional_layer : public layer {
   core::conv_layer_worker_specific_storage cws_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

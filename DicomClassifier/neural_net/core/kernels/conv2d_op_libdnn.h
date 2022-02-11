@@ -17,7 +17,7 @@
 #include "libdnn.hpp"
 #endif
 
-namespace tiny_dnn {
+namespace neural_net {
 
 class Conv2dLibDNNForwardOp : public core::OpKernel {
  public:
@@ -263,4 +263,4 @@ class Conv2dLibDNNBackwardOp : public core::OpKernel {
   }
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

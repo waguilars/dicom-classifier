@@ -13,7 +13,7 @@
 
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * element-wise operation: ```f(x) = h(scale*x+bias)```
@@ -84,4 +84,4 @@ class linear_layer : public layer {
   float_t scale_, bias_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -15,7 +15,7 @@
 #include "neural_net/layers/layer.h"
 #include "neural_net/util/util.h"
 
-namespace tiny_dnn {
+namespace neural_net {
 
 /**
  * Pad zeros around tensors.
@@ -119,4 +119,4 @@ class zero_pad_layer : public layer {
   size_t h_pad_size_;
 };
 
-}  // namespace tiny_dnn
+}  // namespace neural_net

@@ -13,14 +13,14 @@ namespace models {
 
 // Based on:
 // https://github.com/DeepMark/deepmark/blob/master/torch/image%2Bvideo/alexnet.lua
-class alexnet : public tiny_dnn::network<tiny_dnn::sequential> {
+class alexnet : public neural_net::network<neural_net::sequential> {
  public:
   explicit alexnet(const std::string &name = "")
-    : tiny_dnn::network<tiny_dnn::sequential>(name) {
-    // todo: (karandesai) shift this to tiny_dnn::activation
-    using relu     = tiny_dnn::activation::relu;
-    using conv     = tiny_dnn::layers::conv;
-    using max_pool = tiny_dnn::layers::max_pool;
+    : neural_net::network<neural_net::sequential>(name) {
+    // todo: (karandesai) shift this to neural_net::activation
+    using relu     = neural_net::activation::relu;
+    using conv     = neural_net::layers::conv;
+    using max_pool = neural_net::layers::max_pool;
     *this << conv(224, 224, 11, 11, 3, 64, padding::valid, true, 4, 4);
     *this << relu(54, 54, 64);
     *this << max_pool(54, 54, 64, 2);
