@@ -13,8 +13,8 @@
 #include <string>
 #include <typeindex>
 
-#include <cereal/archives/json.hpp>
-#include <cereal/types/memory.hpp>
+#include <tiny_dnn/cereal/archives/json.hpp>
+#include <tiny_dnn/cereal/types/memory.hpp>
 
 #include "tiny_dnn/layers/layers.h"
 #include "tiny_dnn/util/macro.h"

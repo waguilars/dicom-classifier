@@ -5,6 +5,8 @@
     "*.js": "javascript",
     "array": "cpp",
     "*.tcc": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "utility": "cpp",
+    "forward_list": "cpp"
   }
 }

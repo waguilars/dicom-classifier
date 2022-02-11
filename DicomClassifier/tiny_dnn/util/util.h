@@ -27,14 +27,14 @@
 #include "tiny_dnn/config.h"
 
 #ifndef CNN_NO_SERIALIZATION
-#include <cereal/archives/binary.hpp>
-#include <cereal/archives/json.hpp>
-#include <cereal/archives/portable_binary.hpp>
-#include <cereal/cereal.hpp>
-#include <cereal/types/deque.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/types/string.hpp>
-#include <cereal/types/vector.hpp>
+#include <tiny_dnn/cereal/archives/binary.hpp>
+#include <tiny_dnn/cereal/archives/json.hpp>
+#include <tiny_dnn/cereal/archives/portable_binary.hpp>
+#include <tiny_dnn/cereal/cereal.hpp>
+#include <tiny_dnn/cereal/types/deque.hpp>
+#include <tiny_dnn/cereal/types/polymorphic.hpp>
+#include <tiny_dnn/cereal/types/string.hpp>
+#include <tiny_dnn/cereal/types/vector.hpp>
 #endif
 
 #include "tiny_dnn/util/aligned_allocator.h"

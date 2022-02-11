@@ -11,7 +11,7 @@
 #include <utility>
 #include <vector>
 
-#include <cereal/access.hpp>  // For LoadAndConstruct
+#include <tiny_dnn/cereal/access.hpp>  // For LoadAndConstruct
 #include "tiny_dnn/tiny_dnn.h"
 
 namespace detail {
