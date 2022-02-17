@@ -46,6 +46,12 @@ private:
     }
 
 public:
+/**
+ * @brief Construct a new Point object contruye un nuevo punto para calcular en cada iteracion
+ * 
+ * @param id identificador de nuevo punto.
+ * @param line tamaño del vector para almacenar los puntos.
+ */
     Point(int id, string line)
     {
         pointId = id;
@@ -54,20 +60,55 @@ public:
         clusterId = 0; // Initially not assigned to any cluster
     }
 
+/**
+ * @brief Construct a new Point object 
+ * 
+ * @param id identificador del nuevo punto
+ * @param dataPoints datos de los puntos almacenados en un vector
+ */
+
     Point(int id, vector<double> dataPoints) {
         pointId = id;
         values = dataPoints;
         dimensions = dataPoints.size();
         clusterId = 0;
     }
+/**
+ * @brief Get the Dimensions object devuelve las dimensiones de la matriz
+ * 
+ * @return int regresa el numero de dimensiones
+ */
 
     int getDimensions() { return dimensions; }
 
+/**
+ * @brief Get the Cluster object regresa el numero de cluster 
+ * 
+ * @return int regresa el numero de clusters
+ */
+
     int getCluster() { return clusterId; }
+/**
+ * @brief devuelve el ID del punto calculado
+ * 
+ * @return int valor del id del punto
+ */
 
     int getID() { return pointId; }
+/**
+ * @brief Set the Cluster object envia el nuevo valor del cluster
+ * 
+ * @param val valor del clusterid a actualizar
+ */
 
     void setCluster(int val) { clusterId = val; }
+
+/**
+ * @brief Get the Val object obtiene el valor del punto
+ * 
+ * @param pos la posicion del punto
+ * @return double el valor del punto
+ */
 
     double getVal(int pos) { return values[pos]; }
 };
@@ -80,6 +121,12 @@ private:
     vector<Point> points;
 
 public:
+/**
+ * @brief Construct a new Cluster object
+ * 
+ * @param clusterId identificador del cluster
+ * @param centroid identificador del centroide
+ */
     Cluster(int clusterId, Point centroid)
     {
         this->clusterId = clusterId;
@@ -90,12 +137,24 @@ public:
         this->addPoint(centroid);
     }
 
+    /**
+     * @brief Agrega un nuevo punto
+     * 
+     * @param p punto a agregar
+     */
+
     void addPoint(Point p)
     {
         p.setCluster(this->clusterId);
         points.push_back(p);
     }
-
+    /**
+     * @brief Elimina un punto
+     * 
+     * @param pointId  identificador del punto
+     * @return true condicion para eliminar o mantener el punto
+     * @return false condicion para eliminar o mantener el punto
+     */
     bool removePoint(int pointId)
     {
         int size = points.size();
@@ -111,15 +170,50 @@ public:
         return false;
     }
 
+    /**
+     * @brief Remuev todos los puntos
+     * 
+     */
     void removeAllPoints() { points.clear(); }
+
+    /**
+     * @brief Get the Id object
+     * 
+     * @return int valor del identificador del cluster
+     */
 
     int getId() { return clusterId; }
 
+    /**
+     * @brief Get the Point object
+     * 
+     * @param pos valor de la posicion del punto
+     * @return Point regresa el valor del punto en la posicion enviada
+     */
+
     Point getPoint(int pos) { return points[pos]; }
+    /**
+     * @brief Get the Size object
+     * 
+     * @return int numero de puntos del vector
+     */
 
     int getSize() { return points.size(); }
+    /**
+     * @brief Get the Centroid By Pos object
+     * 
+     * @param pos numero de la posicion del centroide
+     * @return double valor del centroide en base a la posicion
+     */
 
     double getCentroidByPos(int pos) { return centroid[pos]; }
+
+    /**
+     * @brief Set the Centroid By Pos object
+     * 
+     * @param pos valor de la posicion del vector a enviar
+     * @param val valor del centroide a enviar
+     */
 
     void setCentroidByPos(int pos, double val) { this->centroid[pos] = val; }
 };
@@ -186,6 +280,13 @@ private:
     }
 
 public:
+/**
+ * @brief Construct a new KMeans object
+ * 
+ * @param K valor para k
+ * @param iterations numero de iteraicones a ejecutar
+ * @param output_dir directorio de salida del resultado
+ */
     KMeans(int K, int iterations, string output_dir)
     {
         this->K = K;
@@ -288,6 +389,12 @@ public:
     vector<Cluster> getClustersValues() {
         return clusters;
     }
+    /**
+     * @brief almacena los nuevos valores de los puntos en el vector
+     * 
+     * @param all_points un vector que almacena todos los puntos 
+     * @param prefix cadena de texto para almacenar junto con los puntos
+     */
 
     void savePoints(vector<Point> &all_points ,string &prefix) {
 
@@ -304,6 +411,12 @@ public:
 
         return;
     }
+
+    /**
+     * @brief Almacena todos los valores de los clusters calculados 
+     * 
+     * @param prefix extension de los cluster almacenados
+     */
 
     void saveClusters(string &prefix) {
         // Write cluster centers to file
@@ -332,6 +445,11 @@ public:
 
         return;
     }
+    /**
+     * @brief Get the Avg Clusters object
+     * 
+     * @return double obtiene el valor de los centroides y calcula el porcentaje de average
+     */
 
     double getAvgClusters() {
 
