@@ -17,15 +17,46 @@ class RF
 public:
     std::unique_ptr<Forest> forest;
     int totalTrees;
-
+/**
+ * @brief Construct a new RF object
+ * 
+ * @param trees numero de arboles a crear
+ */
     RF(int trees);
     ~RF();
-
+/**
+ * @brief Set the Train Data object
+ * 
+ * @param data matriz inicial para entrenamiento
+ * @param target etiquetas del entrenamiento
+ */
     void setTrainData(vector<vector<double>> data, vector<int> target);
+/**
+ * @brief metodo para ver las predicciones de la tecnica
+ * 
+ * @param data vector con los valores de inciales
+ * @param target etiquetas de entrenamiento
+ * @param showOutput resultados obtenidos despues del proceso
+ */
     void predict(vector<vector<double>> data, vector<int> target, bool showOutput);
     void init(bool showOutput);
+/**
+ * @brief Set the Train File object
+ * 
+ * @param filename nombre del archivo 
+ */
     void setTrainFile(string filename);
+    /**
+     * @brief Set the Predict File object
+     * 
+     * @param filename nombre del archivo
+     */
     void setPredictFile(string filename);
+/**
+ * @brief Set the Dep Var Name object
+ * 
+ * @param name nombre del archivo
+ */
     void setDepVarName(string name);
 
 private:

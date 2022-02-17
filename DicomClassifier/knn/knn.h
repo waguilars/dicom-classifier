@@ -5,6 +5,13 @@
 
 class SingleExecutionResults {
 public:
+	/**
+	 * @brief Construct a new Single Execution Results object
+	 * 
+	 * @param nExamples numero de ejemplos 
+	 * @param nSuccess numero de sucesos
+	 * @param nRejected numero de rechazados
+	 */
 	SingleExecutionResults(int nExamples, int nSuccess, int nRejected) {
 		this->nExamples = nExamples;
 		this->nSuccess = nSuccess;
@@ -30,6 +37,12 @@ public:
 	
 	DatasetPointer getRawResults() {return results;}
 
+	/**
+	 * @brief Construct a new KNNResults object
+	 * 
+	 * @param results almacena los resultados con los puntos trabajados
+	 */
+
 	KNNResults(DatasetPointer results) { this->results = results;}
 
 private:
@@ -40,6 +53,11 @@ private:
 
 class KNN {
 public:
+/**
+ * @brief Construct a new KNN object
+ * 
+ * @param train conjunto de datos de los puntos con los cuales se ejecuta la tecnica
+ */
 	KNN (DatasetPointer train) { this->data = train; }
 
 	KNNResults run(int k, DatasetPointer target);
