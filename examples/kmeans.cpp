@@ -1,52 +1,29 @@
-#include "kmeans.h"
+#include <iostream>
+#include "kmeans/kmeans.h"
 
-vector<Point> getPoints(string filename) {
-    ifstream infile(filename.c_str());
-    if (!infile.is_open())
-    {
-        cout << "Error: Failed to open file: " << filename << endl;
-        return {};
-    }
-    int pointId = 1;
-    vector<Point> all_points;
-    string line;
+#include "dicom/dicomutils.h"
+#include "dicom/DicomReader.h"
 
-    while (getline(infile, line))
-    {
-        Point point(pointId, line);
-        all_points.push_back(point);
-        pointId++;
-    }
-
-    infile.close();
-    cout << "\nData fetched successfully!" << endl
-         << endl;
-
-    return all_points;
-}
+using namespace std;
 
 int main() {
+    DicomReader dicomObj("/home/will/Projects/dicom-classifier/data/20586908_6c613a14b80a8591_MG_R_CC_ANON.dcm");
+    vector<vector<double>> data = dicomObj.getDoubleImageMatrix(12);
 
-    int k = 2;
-    string filename = "/home/will/Downloads/data.csv";
-    string testFile = "/home/will/Downloads/test.csv";
+    vector<Point> points = DicomUtils::getKMeansPoints(data);
 
-    vector<Point> all_points = getPoints(filename);
-    vector<Point> test_points = getPoints(testFile);
+    int k = 3;
 
-    // Return if number of clusters > number of points
-    if ((int)all_points.size() < k)
-    {
-        cout << "Error: Number of clusters greater than number of points." << endl;
-        return 1;
-    }
-
-    // Running K-Means Clustering
     int iters = 5;
 
     KMeans kmeans(k, iters, ".");
+    kmeans.run(points); // last
 
-    kmeans.run(all_points);
+    string pref1 = "cluster";
+    string pref2 = "points";
+    kmeans.saveClusters(pref1);
+    kmeans.savePoints(points, pref2);
+
     return 0;
 }
 
