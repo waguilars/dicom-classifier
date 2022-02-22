@@ -13,6 +13,10 @@ file(GLOB_RECURSE SOURCES_FILES
     "DicomClassifier/*.cxx"
 )
 
+file(GLOB_RECURSE METRICS_SOURCES_FILES
+    "metrics/*.cpp"
+)
+
 # Define headers
 file(GLOB_RECURSE HEADERS_FILES
     "*.h"
@@ -21,9 +25,11 @@ file(GLOB_RECURSE HEADERS_FILES
 
 # Set sources
 add_library(DicomClassifier STATIC "${SOURCES_FILES}")
+add_library(DicomMetrics STATIC "${METRICS_SOURCES_FILES}")
 
 # Include dirs
 include_directories(DicomClassifier)
+include_directories(metrics)
 
 
 # C++ flags

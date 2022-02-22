@@ -1,11 +1,42 @@
-/*
- * system-metrics.cpp
- *
- *  Created on: 10 ene. 2020
- *      Author:
- */
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <errno.h>
+#include <fcntl.h>
 
-#include "benchmark/system_metrics.hpp"
+#include "performance/benchmark.h"
+
+#define SIZE          8192  /* buffer size for reading /proc/<pid>/status */
+
+int parseLine(char* line){
+    // This assumes that a digit will be found and the line ends in " Kb".
+    int i = strlen(line);
+    const char* p = line;
+    while (*p <'0' || *p > '9') p++;
+    line[i-3] = '\0';
+    i = atoi(p);
+    return i;
+}
+
+int getRamUsage(){ //Note: this value is in KB!
+    FILE* file = fopen("/proc/self/status", "r");
+    int result = -1;
+    char line[128];
+
+    while (fgets(line, 128, file) != NULL){
+        if (strncmp(line, "VmRSS:", 6) == 0){
+            result = parseLine(line);
+            break;
+        }
+    }
+    fclose(file);
+    return result;
+}
 
 size_t systemMetrics::memoryUsage = 0;
 map<void *, size_t> systemMetrics::pointersSize;

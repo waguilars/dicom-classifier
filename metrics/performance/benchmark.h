@@ -1,12 +1,6 @@
-/*
- * system-metrics.hpp
- *
- *  Created on: 10 ene. 2020
- *      Author: ariel
- */
+#ifndef BENCHMARK_H
+#define BENCHMARK_H
 
-#ifndef HEADER_SYSTEM_METRICS_HPP_
-#define HEADER_SYSTEM_METRICS_HPP_
 
 #include "stdlib.h"
 #include "stdio.h"
@@ -17,7 +11,6 @@
 #include <time.h>
 #include <sys/resource.h>
 #include <string>
-#include "memcount.hpp"
 #include <limits>
 #include <malloc.h>
 #include <map>
@@ -84,4 +77,6 @@ public:
 	double getDurationInMiliseconds();
 };
 
-#endif /* HEADER_SYSTEM_METRICS_HPP_ */
+int getRamUsage();
+
+#endif
