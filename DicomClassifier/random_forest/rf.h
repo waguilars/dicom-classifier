@@ -45,7 +45,7 @@ public:
  * 
  * @param filename nombre del archivo 
  */
-    void setTrainFile(string filename);
+    void setFile(string filename);
     /**
      * @brief Set the Predict File object
      * 

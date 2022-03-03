@@ -73,7 +73,7 @@ void RF::init(bool showOutput)
     }
 }
 
-void RF::setTrainFile(string filename)
+void RF::setFile(string filename)
 {
     this->filename = filename;
 }
