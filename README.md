@@ -93,6 +93,31 @@ En la pestaña `Search directories > linker` agregue el directorio donde se se e
 /home/user/projects/dicom-classifier/build
 ```
 
+### CMake
+
+Para IDEs que hace uso de CMAKE para la compilacion se puede ejecutar haciendo uso de la siguiente configuracion en el archivo `CMakeLists.txt`
+
+```
+cmake_minimum_required(VERSION 3.5)
+
+project(knn_cmake LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_library(DicomClassifier STATIC IMPORTED)
+set_target_properties(DicomClassifier PROPERTIES
+    IMPORTED_LOCATION "/home/will/Projects/dicom-classifier/build/libDicomClassifier.a"
+    INTERFACE_INCLUDE_DIRECTORIES "/home/will/Projects/dicom-classifier/DicomClassifier"
+)
+
+add_executable(knn_cmake main.cpp)
+target_link_libraries(knn_cmake DicomClassifier -ldcmdata -ldcmimgle -ldcmimage -ldcmjpeg -lpthread)
+
+
+```
+
+
 ## Ejemplos
 
 Puede encontrar ejemplos de uso [aquí](examples)
