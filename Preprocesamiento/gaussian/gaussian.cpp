@@ -13,6 +13,9 @@ typedef int filtro;
 // y corrigiendo los bordes de la misma.
 
 vector<vector<filtro>> Filtro_Gauss(vector<vector<filtro>> data,int SizeKernel){ //Parámetros de la función Matriz de imágen, Tamaño del kernel
+    // Parametro 1 data: Matriz de imágen- Representa los pixeles que posee la imágen dicom
+    // Parametro 2 sizeKernel- Representa el tamaño del kernel el cuál sea mas grande se eliminara más el ruido de la imágen.
+
     // Variable inicializada con el paso del parámetro del tamaño del kernel
     double GKernel[SizeKernel][SizeKernel];
     // El valor del sigma determina si es un filtro en 1-D o 2-D
@@ -68,6 +71,9 @@ vector<vector<filtro>> Filtro_Gauss(vector<vector<filtro>> data,int SizeKernel){
         }
         // Retornamos la matriz resultante dst
         return dst;
+        // En caso de que se requiera guardar un archivo csv con los pixeles resultantes, usamos la función dicomOBj.saveData
+        // Parametros: vector resultante,path,nombre del archivo, delimitador, true o false si se requiere cabeceras en el csv.
         //dicomObj.saveData(dst,"/home/debian/Documentos/Proyecto_Paralelo_FiltroG_Secuencial/IMAGENES/IMG4/DCM50.2_C++.csv",",",false);
     }
 } 
+
