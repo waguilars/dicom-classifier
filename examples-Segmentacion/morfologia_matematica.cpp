@@ -52,9 +52,9 @@ int main()
     //GUARDAR RESULTADO EN UN ARCHIVO DE TEXTO
     // En caso de que se requiera guardar un archivo csv/txt con los píxeles resultantes, usamos la función DicomReader::saveData
     // PARÁMETRO 1: Matriz de imagen con los píxeles resultantes.
-    // PARÁMETRO 1: Ruta dónde se almacenará la matriz de píxeles resultantes.
-    // PARÁMETRO 1: Delimitador entre cada uno de los píxeles.
-    // PARÁMETRO 1: 1 o 0 (Verdadero o False) según se desee o no añadir cabeceras al archivo csv/txt.
+    // PARÁMETRO 2: Ruta dónde se almacenará la matriz de píxeles resultantes.
+    // PARÁMETRO 3: Delimitador entre cada uno de los píxeles.
+    // PARÁMETRO 4: 1 o 0 (Verdadero o False) según se desee o no añadir cabeceras al archivo csv/txt.
     DicomReader::saveData(vectApertura, "/home/debian11/Documentos/morfologia-matematica/build-test_morfologia_matematica-Desktop_Qt_6_2_4_GCC_64bit-Debug/Resultados/MM1_A.txt", ",", 0);
     DicomReader::saveData(vectCierre, "/home/debian11/Documentos/morfologia-matematica/build-test_morfologia_matematica-Desktop_Qt_6_2_4_GCC_64bit-Debug/Resultados/MM1_C.txt", ",", 0);
     DicomReader::saveData(vectDilatacion, "/home/debian11/Documentos/morfologia-matematica/build-test_morfologia_matematica-Desktop_Qt_6_2_4_GCC_64bit-Debug/Resultados/MM1_D.txt", ",", 0);
