@@ -22,7 +22,8 @@ void init();
 // Autores: Alvaro Lomas, Jhony Pillajo, Joel Romo
 // Descripción del filtro: Este filtro se encarga de eliminar algún tipo de ruido presente en determinada imagen, ya sea utilizando una dilatación
 // (obtener el mayor valor de una ventana superpuesta sobre la imagen) o una erosión(obtener el menor valor de una ventana superpuesta sobre la imagen),
-// de tal forma que se eliminan pequeñas zonas de la imagen donde exista información poco relevante.
+// de tal forma que se eliminan pequeñas zonas de la imagen donde exista información poco relevante. Además, también se cuenta con filtros mixtos como
+// son apertura(aplica primero una erosión y después una dilatación) y cierre(aplica primero una dilatación y después una erosión).
 
 /*METODOS*/
 //FUNCIÓN QUE HAYA EL VALOR MÁXIMO AL RECORRER KERNEL SOBRE LA MATRIZ DE IMAGEN
