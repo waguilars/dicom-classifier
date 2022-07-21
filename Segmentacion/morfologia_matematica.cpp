@@ -18,10 +18,14 @@ int conversorDatos(char* line);
 
 double obtenerUsoDeCPU();
 void init();
+// Autores: Alvaro Lomas, Jhony Pillajo, Joel Romo
+// Descripción del filtro: Este filtro se encarga de eliminar algún tipo de ruido presente en determinada imagen, ya sea utilizando una dilatación
+// (obtener el mayor valor de una ventana superpuesta sobre la imagen) o una erosión(obtener el menor valor de una ventana superpuesta sobre la imagen),
+// de tal forma que se eliminan pequeñas zonas de la imagen donde existe poca información.
 
 /*METODOS*/
 //FUNCIÓN QUE HAYA EL VALOR MÁXIMO AL RECORRER KERNEL SOBRE LA MATRIZ DE IMAGEN
-//ENVÍA COMO PARÁMETRO EL KERNEL DE TIPO vector<element> elements
+//ENVÍA COMO PARÁMETRO EL KERNEL DE TIPO vector<element>
 element maximo(vector<element> elements) {
    //DECLARA E INICIALIZA LA VARIABLE DE COMPARACIÓN
    element max = -1;
@@ -35,7 +39,7 @@ element maximo(vector<element> elements) {
 }
 
 //FUNCIÓN QUE HAYA EL VALOR MÍNIMO AL RECORRER KERNEL SOBRE LA MATRIZ DE IMAGEN
-//ENVÍA COMO PARÁMETRO EL KERNEL DE TIPO vector<element> elements
+//ENVÍA COMO PARÁMETRO EL KERNEL DE TIPO vector<element>
 element minimo(vector<element> elements) {
    //DECLARA E INICIALIZA LA VARIABLE DE COMPARACIÓN
    element min = 1000000;
@@ -53,8 +57,15 @@ element minimo(vector<element> elements) {
 //2 -> KERNEL HORIZONTAL
 //3 -> KERNEL VERTICAL
 //4 -> KERNEL CRUZADO
+// PARÁMETROS DE LA FUNCIÓN: dimension y tipo
 vector<vector<element>> determinarKernel(int dimension, int tipo){
+    // PARÁMETRO 1: dimension -> Valor entero que representa la dimensión del kernel a crear.
+    // PARÁMETRO 2: tipo -> Valor entero que representa el tipo de kernel a crear según los tipos antes mencionados. 
+   
+    //CREAR E INICIALIZAR KERNEL
     vector<vector<int>> matriz(dimension, vector<int> (dimension));
+   
+    //OBTENER LA MITAD DEL KERNEL PARA POSTERIORMENTE LLENARLA DE VALORES 1 SEGÚN CORRESPONDA EL TIPO DE KERNEL
     double mitad = round(matriz.size()/2.0)-1;
 
     int i, j;
@@ -66,6 +77,7 @@ vector<vector<element>> determinarKernel(int dimension, int tipo){
             #pragma omp parallel for collapse(2) shared(matriz) private(i,j) schedule(static)
             for (i = 0; i < matriz.size(); ++i) {
                 for (j = 0; j < matriz[0].size(); ++j) {
+                    //LLENA TODA LA MATRIZ DE VALORES 1
                     matriz[i][j]=1;
                 }
             }
@@ -74,6 +86,7 @@ vector<vector<element>> determinarKernel(int dimension, int tipo){
             #pragma omp parallel for collapse(2) shared(matriz) private(i,j) schedule(static)
             for (i = 0; i < matriz.size(); ++i) {
                 for (j = 0; j < matriz[0].size(); ++j) {
+                    //SI LA POSICIÓN CORRESPONDE A LA MITAD DEL ALTO ENTONCES SE LLENA DE VALORES 1
                     if(i==mitad){
                         matriz[i][j]=1;
                     } else {
@@ -86,6 +99,7 @@ vector<vector<element>> determinarKernel(int dimension, int tipo){
             #pragma omp parallel for collapse(2) shared(matriz) private(i,j) schedule(static)
             for (i = 0; i < matriz.size(); ++i) {
                 for (j = 0; j < matriz[0].size(); ++j) {
+                    //SI LA POSICIÓN CORRESPONDE A LA MITAD DEL ANCHO ENTONCES SE LLENA DE VALORES 1
                     if(j==mitad){
                         matriz[i][j]=1;
                     } else {
@@ -98,6 +112,7 @@ vector<vector<element>> determinarKernel(int dimension, int tipo){
             #pragma omp parallel for collapse(2) shared(matriz) private(i,j) schedule(static)
             for (i = 0; i < matriz.size(); ++i) {
                 for (j = 0; j < matriz[0].size(); ++j) {
+                   //SI LA POSICIÓN CORRESPONDE YA SEA A LA MITAD DEL ALTO O LA MITAD DEL ANCHO ENTONCES SE LLENA DE VALORES 1
                     if(j==mitad || i==mitad){
                         matriz[i][j]=1;
                     } else {
@@ -119,8 +134,11 @@ vector<vector<element>> determinarKernel(int dimension, int tipo){
 }
 
 //RECIBE LA IMAGEN Y EL ELEMENTO ESTRUCTURANTE O KERNEL, AMBOS DE TIPO (vector<vector<element>>)
-vector<vector<element>> dilatacion(vector<vector<element>> image,vector<vector<element>> elementoEstructurante, int mostrar=1) {   
-    //VARIABLES PARA MEDIR EL TIEMPO DE EJECUCIÓN
+// PARÁMETROS DE LA FUNCIÓN: image y elementoEstructurante
+vector<vector<element>> dilatacion(vector<vector<element>> image, vector<vector<element>> elementoEstructurante, int mostrar=1) {   
+   // PARÁMETRO 1: image -> Matriz de imagen que representa los píxeles que posee la imagen dicom.
+   // PARÁMETRO 2: elementoEstructurante -> Matriz que representa un tipo de ventana a recorrer sobre la matriz de imagen.
+   //VARIABLES PARA MEDIR EL TIEMPO DE EJECUCIÓN
     double tbegin;
     if(mostrar == 1){
         tbegin = omp_get_wtime();
@@ -153,6 +171,7 @@ vector<vector<element>> dilatacion(vector<vector<element>> image,vector<vector<e
          for(i = 0; i < Mestructurante; i++) {
             for(j = 0; j < Nestructurante; j++) {
                 if(elementoEstructurante[i][j] == 1) {
+                    //GUARDAR ELEMENTOS DE LA IMAGEN EN LA VENTANA RECORRIDA
                     window.push_back(image[yy][xx]);
                 }
                 xx++;
@@ -171,11 +190,15 @@ vector<vector<element>> dilatacion(vector<vector<element>> image,vector<vector<e
        cout << "RAM " << obtenerUsoDeRAM() << " KB" << endl;
        cout << "CPU " << obtenerUsoDeCPU() << " %" << endl;
    }
+   //RETORNAR LA MATRIZ DE IMAGEN RESULTANTE
    return img_result;
 }
 
 //RECIBE LA IMAGEN Y EL ELEMENTO ESTRUCTURANTE O KERNEL, AMBOS DE TIPO (vector<vector<element>>)
-vector<vector<element>> erosion(vector<vector<element>> image,vector<vector<element>> elementoEstructurante, int mostrar=1) {
+// PARÁMETROS DE LA FUNCIÓN: image y elementoEstructurante
+vector<vector<element>> erosion(vector<vector<element>> image, vector<vector<element>> elementoEstructurante, int mostrar=1) {
+    // PARÁMETRO 1: image -> Matriz de imagen que representa los píxeles que posee la imagen dicom.
+    // PARÁMETRO 2: elementoEstructurante -> Matriz que representa un tipo de ventana a recorrer sobre la matriz de imagen.
     //VARIABLES PARA MEDIR EL TIEMPO DE EJECUCIÓN
     double tbegin;
     if(mostrar == 1){
@@ -209,6 +232,7 @@ vector<vector<element>> erosion(vector<vector<element>> image,vector<vector<elem
          for(i = 0; i < Mestructurante; i++) {
             for(j = 0; j < Nestructurante; j++) {
                 if(elementoEstructurante[i][j] == 1) {
+                    //GUARDAR ELEMENTOS DE LA IMAGEN EN LA VENTANA RECORRIDA
                     window.push_back(image[yy][xx]);
                 }
                 xx++;
@@ -227,18 +251,22 @@ vector<vector<element>> erosion(vector<vector<element>> image,vector<vector<elem
        cout << "RAM " << obtenerUsoDeRAM() << " KB" << endl;
        cout << "CPU " << obtenerUsoDeCPU() << " %" << endl;
    }
+   //RETORNAR LA MATRIZ DE IMAGEN RESULTANTE
    return img_result;
 }
 
 //RECIBE LA IMAGEN Y EL ELEMENTO ESTRUCTURANTE O KERNEL, AMBOS DE TIPO (vector<vector<element>>)
-vector<vector<element>> apertura(vector<vector<element>> image,vector<vector<element>> elementoEstructurante) {
+// PARÁMETROS DE LA FUNCIÓN: image y elementoEstructurante
+vector<vector<element>> apertura(vector<vector<element>> image, vector<vector<element>> elementoEstructurante) {
+    // PARÁMETRO 1: image -> Matriz de imagen que representa los píxeles que posee la imagen dicom.
+    // PARÁMETRO 2: elementoEstructurante -> Matriz que representa un tipo de ventana a recorrer sobre la matriz de imagen.
     //VARIABLES PARA MEDIR EL TIEMPO DE EJECUCIÓN
     double tbegin = omp_get_wtime();
     
     //DECLARAR LA VARIABLE DONDE SE ALMACENARÁ LA IMAGEN YA FILTRADA
     vector<vector<element>> img_result;
     
-    //APLICAR EL FILTRO DE EROSIÓN Y A ESTA IMAGEN RESULTANTE EL FILTRO DE DILATACIÓN
+    //APLICAR EL FILTRO DE EROSIÓN Y A ESTA IMAGEN RESULTANTE EL FILTRO DE DILATACIÓN, SE ENVÍA 0 PARA NO MOSTRAR EL BENCHMARK
     img_result = erosion(image, elementoEstructurante, 0);
     img_result = dilatacion(img_result, elementoEstructurante,0);
 
@@ -247,19 +275,23 @@ vector<vector<element>> apertura(vector<vector<element>> image,vector<vector<ele
     cout << "Execution Time Del Filtro de Apertura: " << time << "; Max Threads:" << omp_get_max_threads() << endl;
     cout << "RAM " << obtenerUsoDeRAM() << " KB" << endl;
     cout << "CPU " << obtenerUsoDeCPU() << " %" << endl;
-       
+    
+    //RETORNAR LA MATRIZ DE IMAGEN RESULTANTE
     return img_result;
 }
 
 //RECIBE LA IMAGEN Y EL ELEMENTO ESTRUCTURANTE O KERNEL, AMBOS DE TIPO (vector<vector<element>>)
+// PARÁMETROS DE LA FUNCIÓN: image y elementoEstructurante
 vector<vector<element>> cierre(vector<vector<element>> image,vector<vector<element>> elementoEstructurante) {
+    // PARÁMETRO 1: image -> Matriz de imagen que representa los píxeles que posee la imagen dicom.
+    // PARÁMETRO 2: elementoEstructurante -> Matriz que representa un tipo de ventana a recorrer sobre la matriz de imagen.
     //VARIABLES PARA MEDIR EL TIEMPO DE EJECUCIÓN
     double tbegin = omp_get_wtime();
  
     //DECLARAR LA VARIABLE DONDE SE ALMACENARÁ LA IMAGEN YA FILTRADA
     vector<vector<element>> img_result;
 
-    //APLICAR EL FILTRO DE EROSIÓN Y A ESTA IMAGEN RESULTANTE EL FILTRO DE DILATACIÓN
+    //APLICAR EL FILTRO DE DILATACIÓN Y A ESTA IMAGEN RESULTANTE EL FILTRO DE EROSIÓN, SE ENVÍA 0 PARA NO MOSTRAR EL BENCHMARK
     img_result = dilatacion(image, elementoEstructurante, 0);
     img_result = erosion(img_result, elementoEstructurante, 0);
 
@@ -268,7 +300,8 @@ vector<vector<element>> cierre(vector<vector<element>> image,vector<vector<eleme
     cout << "Execution Time Del Filtro de Cierre: " << time <<"; Max Threads:" << omp_get_max_threads() <<endl;
     cout << "RAM " << obtenerUsoDeRAM() << " KB" << endl;
     cout << "CPU " << obtenerUsoDeCPU() << " %" << endl;
-   
+    
+    //RETORNAR LA MATRIZ DE IMAGEN RESULTANTE
     return img_result;
 }
 
