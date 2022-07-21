@@ -8,6 +8,7 @@
 #include <bits/stdc++.h>
 #include <iostream>
 #include <vector>
+#include <omp.h>
 #include <memory.h>
 
 using namespace std;
