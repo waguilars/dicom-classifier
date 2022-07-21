@@ -18,37 +18,46 @@ int conversorDatos(char* line);
 
 double obtenerUsoDeCPU();
 void init();
+
 // Autores: Alvaro Lomas, Jhony Pillajo, Joel Romo
 // Descripción del filtro: Este filtro se encarga de eliminar algún tipo de ruido presente en determinada imagen, ya sea utilizando una dilatación
 // (obtener el mayor valor de una ventana superpuesta sobre la imagen) o una erosión(obtener el menor valor de una ventana superpuesta sobre la imagen),
-// de tal forma que se eliminan pequeñas zonas de la imagen donde existe poca información.
+// de tal forma que se eliminan pequeñas zonas de la imagen donde exista información poco relevante.
 
 /*METODOS*/
 //FUNCIÓN QUE HAYA EL VALOR MÁXIMO AL RECORRER KERNEL SOBRE LA MATRIZ DE IMAGEN
 //ENVÍA COMO PARÁMETRO EL KERNEL DE TIPO vector<element>
+// PARÁMETROS DE LA FUNCIÓN: elements
 element maximo(vector<element> elements) {
+   // PARÁMETRO 1: elements -> Matriz de elementos que corresponde a la ventana recorrida sobre la imagen.
    //DECLARA E INICIALIZA LA VARIABLE DE COMPARACIÓN
    element max = -1;
    //COMPARACIÓN DE ELEMENTOS
    for(int i = 0; i < elements.size() ; ++i) {
       if(elements[i] > max) {
+          //GUARDAR EL MAYOR VALOR DE LA VENTANA
           max = elements[i];
       }
    }
+   //RETORNAR EL VALOR MÁXIMO DE LA VENTANA
    return max;
 }
 
 //FUNCIÓN QUE HAYA EL VALOR MÍNIMO AL RECORRER KERNEL SOBRE LA MATRIZ DE IMAGEN
 //ENVÍA COMO PARÁMETRO EL KERNEL DE TIPO vector<element>
+// PARÁMETROS DE LA FUNCIÓN: elements
 element minimo(vector<element> elements) {
+   // PARÁMETRO 1: elements -> Matriz de elementos que corresponde a la ventana recorrida sobre la imagen.
    //DECLARA E INICIALIZA LA VARIABLE DE COMPARACIÓN
    element min = 1000000;
    //COMPARACIÓN DE ELEMENTOS
    for(int i = 0; i < elements.size(); ++i) {
       if(elements[i] < min) {
+          //GUARDAR EL MENOR VALOR DE LA VENTANA
           min = elements[i];
       }
    }
+   //RETORNAR EL VALOR MÍNIMO DE LA VENTANA
    return min;
 }
 
@@ -130,6 +139,7 @@ vector<vector<element>> determinarKernel(int dimension, int tipo){
         cout << "Debe ingresar una dimensión de número impar" << endl;
         exit(-1);
     }
+    //RETORNAR LA MATRIZ DEL ELEMENTO ESTRUCTURANTE SEGÚN LOS PARÁMETROS ESPECIFICADOS
     return matriz;
 }
 
@@ -171,7 +181,7 @@ vector<vector<element>> dilatacion(vector<vector<element>> image, vector<vector<
          for(i = 0; i < Mestructurante; i++) {
             for(j = 0; j < Nestructurante; j++) {
                 if(elementoEstructurante[i][j] == 1) {
-                    //GUARDAR ELEMENTOS DE LA IMAGEN EN LA VENTANA RECORRIDA
+                    //GUARDAR ELEMENTOS DE LA IMAGEN RECORRIDA EN LA VENTANA SUPERPUESTA
                     window.push_back(image[yy][xx]);
                 }
                 xx++;
@@ -232,7 +242,7 @@ vector<vector<element>> erosion(vector<vector<element>> image, vector<vector<ele
          for(i = 0; i < Mestructurante; i++) {
             for(j = 0; j < Nestructurante; j++) {
                 if(elementoEstructurante[i][j] == 1) {
-                    //GUARDAR ELEMENTOS DE LA IMAGEN EN LA VENTANA RECORRIDA
+                    //GUARDAR ELEMENTOS DE LA IMAGEN RECORRIDA EN LA VENTANA SUPERPUESTA
                     window.push_back(image[yy][xx]);
                 }
                 xx++;
