@@ -20,11 +20,13 @@ int  adaptiveProcess(vector<vector<element>> im, int row, int col, int kernelSiz
     //Se determina los valores máximo, mínimo y mediana del kernel.
     vector <int> pixels;
     int a,b;
-    #pragma opm parallel for num_threads(32) for collapse(2) shared(im,kernelSize,row,col) private(a,b) schedule(static)
-    for(int a = -kernelSize / 2; a <= kernelSize / 2; a++){
+    #pragma opm parallel for num_threads(32) {
+      #pragma omp for collapse(2) shared(im,kernelSize,row,col) private(a,b) schedule(static)
+      for(int a = -kernelSize / 2; a <= kernelSize / 2; a++){
         for(int b = -kernelSize / 2; b <= kernelSize / 2; b++){
             pixels.push_back(im[row + a][col + b]);
         }
+      }
     }
     sort(pixels.begin(), pixels.end());
     auto min = pixels[0];
@@ -60,11 +62,13 @@ vector<vector<element>> adaptivemedianfilter(vector<vector<element>> src, int mi
     int rows = dst.size();
     int cols = dst[0].size();
     int i,j;
-    #pragma opm parallel for for num_threads(32) collapse(2) shared(rows,cols,maxSize,minSize) private(i,j) schedule(static)
-    for(j = maxSize / 2; j < rows - maxSize / 2; j++){
+    #pragma opm parallel for num_threads(32) {
+      #pragma opm for collapse(2) shared(rows,cols,maxSize,minSize) private(i,j) schedule(static)
+      for(j = maxSize / 2; j < rows - maxSize / 2; j++){
         for(i = maxSize / 2; i < cols * 1 - maxSize / 2; i++){
             dst[i][j] = adaptiveProcess(dst, j, i, minSize, maxSize);
         }
-    }
+      }
+    } 
     return dst;
 }
