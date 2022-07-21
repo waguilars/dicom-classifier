@@ -57,7 +57,6 @@ int  adaptiveProcess(vector<vector<element>> im, int row, int col, int kernelSiz
 //Método que recorre el kernel a través de la imagen.
 
 vector<vector<element>> adaptivemedianfilter(vector<vector<element>> src, int minSize, int maxSize){
-    #pragma omp parallel num_threads(6)
     vector<vector<element>> dst = src;
     int rows = dst.size();
     int cols = dst[0].size();
