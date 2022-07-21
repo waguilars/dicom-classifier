@@ -35,14 +35,14 @@ file(GLOB_RECURSE HEADERS_FILES
 # Set sources
 add_library(DicomClassifier STATIC "${SOURCES_FILES}")
 add_library(DicomMetrics STATIC "${METRICS_SOURCES_FILES}")
-#Añadiendo algoritmo a la librería
+# Añadiendo algoritmo a la librería
 add_library(DicomSegmentacion STATIC "${SEGMENTACION_SOURCES_FILES}")
 add_library(DicomPreprocesamiento STATIC "${Preprocesamiento_SOURCES_FILES}")
 
 # Include dirs
 include_directories(DicomClassifier)
 include_directories(metrics)
-#Añadiendo directorio a la librería
+# Añadiendo directorio a la librería
 include_directories(DicomSegmentacion)
 include_directories(DicomPreprocesamiento)
 
@@ -50,7 +50,7 @@ include_directories(DicomPreprocesamiento)
 set(USE_PTHREAD ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
-#AÑADIR LIBRERÍAS DE OPENMP
+# AÑADIR LIBRERÍAS DE OPENMP
 find_package(OpenMP)
 if (OPENMP_FOUND)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
