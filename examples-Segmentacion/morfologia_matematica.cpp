@@ -50,7 +50,7 @@ int main()
     vectErosion = erosion(data, elementoEstructurante);
 
     //GUARDAR RESULTADO EN UN ARCHIVO DE TEXTO
-    // En caso de que se requiera guardar un archivo csv con los píxeles resultantes, usamos la función DicomReader::saveData
+    // En caso de que se requiera guardar un archivo csv/txt con los píxeles resultantes, usamos la función DicomReader::saveData
     // PARÁMETRO 1: Matriz de imagen con los píxeles resultantes.
     // PARÁMETRO 1: Ruta dónde se almacenará la matriz de píxeles resultantes.
     // PARÁMETRO 1: Delimitador entre cada uno de los píxeles.
