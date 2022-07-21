@@ -9,6 +9,7 @@
 using namespace std;
 
 // Autores: Alvaro Lomas, Jhony Pillajo, Joel Romo
+// Fecha: Julio 2022
 
 int main()
 {
