@@ -69,7 +69,7 @@ vector<vector<element>> cvMat_a_vectorInt(Mat img){
         for (element i = 0; i <= y; i++) {
             vector<element> v1;
             for (element j = 0; j<=x; j++) {
-                element p = img.at<uchar>(Point(j,i)) ;
+                element p = img.at<ushort>(Point(j,i)) ;
                 v1.push_back(p);
             }
             vec.push_back(v1);
