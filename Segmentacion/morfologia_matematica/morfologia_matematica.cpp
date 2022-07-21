@@ -25,7 +25,7 @@ void init();
 // de tal forma que se eliminan pequeñas zonas de la imagen donde exista información poco relevante. Además, también se cuenta con filtros mixtos como
 // son apertura(aplica primero una erosión y después una dilatación) y cierre(aplica primero una dilatación y después una erosión).
 
-/*METODOS*/
+/*MÉTODOS*/
 //FUNCIÓN QUE HAYA EL VALOR MÁXIMO AL RECORRER KERNEL SOBRE LA MATRIZ DE IMAGEN
 //ENVÍA COMO PARÁMETRO EL KERNEL DE TIPO vector<element>
 // PARÁMETROS DE LA FUNCIÓN: elements
