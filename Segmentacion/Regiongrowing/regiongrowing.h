@@ -9,6 +9,8 @@ using namespace std;
 typedef int element;
 int reg_size;
 int reg_mean;
-vector<vector<element>> regiongrowing(vector<vector<element>> src, int reg_size, int reg_mean);
+int x;
+int y;
+vector<vector<element>> regiongrowing(vector<vector<element>> src,int x,int y, int reg_size, int reg_mean);
 
 #endif
